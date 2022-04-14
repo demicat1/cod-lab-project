@@ -1,0 +1,49 @@
+/* Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Inter;
+    font-size: large;
+    font-weight: 600;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 3fr 1fr;
+    gap: 30px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.form-container{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container button, input, a{
+    display: block;
+    margin: 10px;
+}
+
+.form-container button{
+    font-family: Inter;
+    width: 150px;
+    height: 50px;
+    border-radius: 50px;
+    text-decoration: none;
+    /* outline: none; */
+    border: 1px solid #000000;
+    border-style: none;
+    background-color: #636062;
+    color: #e5e5e5;
+}
