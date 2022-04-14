@@ -44,14 +44,6 @@ form{
     justify-items: center;
 }
 
-.input_data {
-    border-radius: 10px;
-    background-color: #E5E5E5;
-    font-size: 17px;
-    text-decoration: none;
-    padding: 0px 0px 0px 10px;
-}
-
 form input, button, a{
     display: block;
     margin: 10px;
@@ -89,4 +81,12 @@ form button:hover{
 form a{
     font-weight: 400;
     color: #000000;
+}
+
+.input_data {
+    border-radius: 10px;
+    background-color: #E5E5E5;
+    font-size: 17px;
+    text-decoration: none;
+    padding: 0px 0px 0px 10px;
 }
