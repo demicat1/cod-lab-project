@@ -35,7 +35,7 @@ form{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #C4C4C4;
+    background-color: #D4CD87;
     border-radius: 15px;
     width: 350px;
     height: 450px;
@@ -63,6 +63,7 @@ form input{
 ::placeholder{
     opacity: 75%;
     font-weight: 500;
+    color: #b9b37a;
 }
 
 form button{
@@ -70,14 +71,14 @@ form button{
     height: 50px;
     border-radius: 20px;
     border-style: none;
-    background-color: #9D9D9D;
+    background-color: #87814e;
     color: #e5e5e5;
     transition: 0.5s;
     cursor: pointer;
 }
 
 form button:hover{
-    box-shadow: 0px 5px #555555;
+    box-shadow: 0px 5px #504c2f;
 }
 
 form a{
