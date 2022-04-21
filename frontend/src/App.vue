@@ -10,14 +10,17 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+
 * {
   font-family: Verdana;
   font-size: large;
-  font-weight: 600;
 }
+
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
   background-color: #9d9d9d;
 }
 </style>
