@@ -1,6 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Sidebar from './components/Sidebar.vue'
+</script>
 
 <template>
+  <sidebar />
   <router-view />
 </template>
 
@@ -14,6 +17,10 @@
 * {
   font-family: Verdana;
   font-size: large;
+}
+
+p {
+  margin: 0;
 }
 
 body {
