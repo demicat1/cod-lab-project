@@ -4,18 +4,23 @@
   </div>
   <div class="sidebar" :class="{ 'w-0': !isOpened }">
     <template v-if="isOpened">
-      <img src="/exit.png" width="40" class="close-ico" @click="isOpened = !isOpened" />
+      <img
+        src="/exit.png"
+        width="40"
+        class="close-ico"
+        @click="isOpened = !isOpened"
+      />
       <img src="/no-avatar.jpg" width="50" class="avatar" />
-      <p>Главная</p>
-      <p>Настройки</p>
+      <p>Main</p>
+      <p>Settings</p>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "@vue/reactivity";
+import { ref } from '@vue/reactivity'
 
-const isOpened = ref(true);
+const isOpened = ref(true)
 </script>
 
 <style scoped>
@@ -24,18 +29,19 @@ const isOpened = ref(true);
   width: 150px;
   height: 100vh;
   z-index: 10;
-  background-color: antiquewhite;
+  background-color: #d4cd87;
   transition: width 0.2s linear;
 }
 .sidebar > p {
   /* padding: 0.3rem 0.2rem 0.3rem 1rem; */
   padding: 0.3rem;
   cursor: pointer;
-  background-color: bisque;
+  background-color: #b9b37a;
+  color: #e5e5e5;
   /* text-align: left; */
 }
 .sidebar > p:hover {
-  background-color: cornsilk;
+  background-color: #504c2f;
 }
 .close-ico {
   position: absolute;
@@ -56,7 +62,11 @@ const isOpened = ref(true);
   left: 25px;
   top: 25px;
   cursor: pointer;
+  background-color: #afa970;
+  padding: 10px;
+  border-radius: 15%;
 }
+
 .w-0 {
   width: 0;
 }

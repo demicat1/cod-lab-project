@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar.vue'
 <template>
   <sidebar />
   <router-view />
+  <div class="bg"></div>
 </template>
 
 <style>
@@ -19,6 +20,15 @@ import Sidebar from './components/Sidebar.vue'
   font-size: large;
 }
 
+.bg {
+  /* background-image: url(/cars.png);
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative; */
+}
+
 p {
   margin: 0;
 }
@@ -28,6 +38,9 @@ body {
   padding: 0;
   box-sizing: border-box;
   min-height: 100vh;
-  background-color: #9d9d9d;
+  background-image: url(/cars.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>

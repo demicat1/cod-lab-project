@@ -1,8 +1,18 @@
 <template>
   <div class="login-wrapper">
     <form @submit.prevent="login" v-if="isLogin" class="login-form">
-      <input class="input-data" type="text" placeholder="Email" v-model="userData.email" />
-      <input class="input-data" type="password" placeholder="Password" v-model="userData.pass" />
+      <input
+        class="input-data"
+        type="text"
+        placeholder="Email"
+        v-model="userData.email"
+      />
+      <input
+        class="input-data"
+        type="password"
+        placeholder="Password"
+        v-model="userData.pass"
+      />
       <button class="login-btn">
         <span>Log in</span>
       </button>
@@ -10,13 +20,30 @@
       <a class="login-link" @click="isLogin = !isLogin">Sign up</a>
     </form>
     <form @submit.prevent="register" v-else class="login-form">
-      <input class="input-data" type="text" placeholder="Email" v-model="userData.email" />
-      <input class="input-data" type="password" placeholder="Password" v-model="userData.pass" />
-      <input class="input-data" type="password" placeholder="Repeat password" v-model="userData.repeatPass" />
+      <input
+        class="input-data"
+        type="text"
+        placeholder="Email"
+        v-model="userData.email"
+      />
+      <input
+        class="input-data"
+        type="password"
+        placeholder="Password"
+        v-model="userData.pass"
+      />
+      <input
+        class="input-data"
+        type="password"
+        placeholder="Repeat password"
+        v-model="userData.repeatPass"
+      />
       <button class="login-btn">
         <span>Sign up</span>
       </button>
-      <a class="login-link" @click="isLogin = !isLogin">Already have an account?</a>
+      <a class="login-link" @click="isLogin = !isLogin"
+        >Already have an account?</a
+      >
     </form>
   </div>
 </template>
@@ -68,6 +95,7 @@ body {
   /* width: 350px;
   height: 450px; */
   padding: 50px 20px;
+  box-shadow: 0 20px 20px #484848;
 }
 
 .input-data {
