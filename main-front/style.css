@@ -1,0 +1,104 @@
+/* Inter font */
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
+
+:root {
+  font-size: 62.5%;
+  font-family: Verdana;
+  --bg-primary: #c4c4c4;
+  --bg-secondary: #9d9d9d;
+  --sidebar-width: 20%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-row {
+  /* min-height: 100vh; */
+  flex: 1;
+  display: flex;
+  background-color: var(--bg-primary);
+}
+
+.main-container {
+  flex: 4;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+  flex-shrink: 1;
+}
+
+.sidebar header {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchbar {
+  padding: 1rem;
+  display: flex;
+  justify-content: stretch;
+}
+
+.search-input {
+  margin: 1rem 0.5rem;
+  padding: 0.5rem;
+  border: 0;
+  font-size: 2.5rem;
+  flex: 80%;
+}
+
+.search-btn {
+  margin: 1rem 0.5rem;
+  padding: 0.5rem;
+  border: 0;
+  font-size: 2.5rem;
+}
+
+.icons-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.icon {
+  margin: 1rem;
+}
+
+.icon img {
+  max-width: 6rem;
+  max-height: 6rem;
+}
+
+@media screen and (max-width: 700px) {
+  .main-row {
+    flex-direction: column-reverse;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: 25vh;
+    bottom: 0;
+  }
+
+  .search-form {
+  }
+}
+
+@media screen and (max-width: 400px) {
+}
+
+.results-container {
+  min-height: auto;
+}
+
+.results-container p {
+  font-size: 1.5rem;
+  overflow: auto;
+}

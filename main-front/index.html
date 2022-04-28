@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="./node_modules/@fortawesome/fontawesome-free/css/all.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="main-row">
+      <div class="sidebar">
+        <header>
+          <div class="searchbar">
+            <input
+              class="search-input"
+              type="text"
+              placeholder="Search.."
+              name="search"
+            />
+            <button type="submit" class="search-btn">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+          <div class="icons-container">
+            <div class="icon">
+              <img src="images/cog.png" alt="" />
+            </div>
+            <div class="icon"></div>
+            <div class="icon"></div>
+            <div class="icon"></div>
+          </div>
+        </header>
+        <hr />
+        <div class="results-container"></div>
+      </div>
+
+      <main class="main-container"></main>
+    </div>
+  </body>
+</html>
