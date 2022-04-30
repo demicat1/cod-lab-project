@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import Sidebar from './components/Sidebar.vue'
+import Sidebar from "./components/Sidebar.vue";
 </script>
 
 <template>
   <sidebar />
   <router-view />
-  <div class="bg"></div>
 </template>
 
 <style>
@@ -14,25 +13,20 @@ import Sidebar from './components/Sidebar.vue'
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
-
+:root {
+  font-size: 62.5%;
+  --bg-primary: #c4c4c4;
+  --bg-secondary: #b9b37a;
+  --sidebar-width: 320px;
+}
 * {
   font-family: Verdana;
   font-size: large;
+  box-sizing: border-box;
 }
-
-.bg {
-  /* background-image: url(/cars.png);
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative; */
-}
-
 p {
   margin: 0;
 }
-
 body {
   margin: 0;
   padding: 0;

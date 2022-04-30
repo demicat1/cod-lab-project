@@ -4,12 +4,7 @@
   </div>
   <div class="sidebar" :class="{ 'w-0': !isOpened }">
     <template v-if="isOpened">
-      <img
-        src="/exit.png"
-        width="40"
-        class="close-ico"
-        @click="isOpened = !isOpened"
-      />
+      <img src="/exit.png" width="40" class="close-ico" @click="isOpened = !isOpened" />
       <img src="/no-avatar.jpg" width="50" class="avatar" />
       <p>Main</p>
       <p>Settings</p>
@@ -18,14 +13,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from '@vue/reactivity'
+import { ref } from "@vue/reactivity";
 
-const isOpened = ref(true)
+const isOpened = ref(false);
 </script>
 
 <style scoped>
 .sidebar {
   position: fixed;
+  right: 0;
   width: 150px;
   height: 100vh;
   z-index: 10;
@@ -46,7 +42,7 @@ const isOpened = ref(true)
 .close-ico {
   position: absolute;
   bottom: 1.5rem;
-  left: 35%;
+  right: 35%;
   transition: transform 0.2s;
   cursor: pointer;
 }
@@ -58,15 +54,14 @@ const isOpened = ref(true)
   transform: scale(1.25);
 }
 .burger-ico {
-  position: absolute;
-  left: 25px;
+  position: fixed;
+  right: 25px;
   top: 25px;
   cursor: pointer;
   background-color: #afa970;
   padding: 10px;
   border-radius: 15%;
 }
-
 .w-0 {
   width: 0;
 }
