@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "leaflet": "^1.8.0",
+    "leaflet.offline": "^2.1.0",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14"
   },

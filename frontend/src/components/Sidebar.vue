@@ -4,7 +4,12 @@
   </div>
   <div class="sidebar" :class="{ 'w-0': !isOpened }">
     <template v-if="isOpened">
-      <img src="/exit.png" width="40" class="close-ico" @click="isOpened = !isOpened" />
+      <img
+        src="/exit.png"
+        width="40"
+        class="close-ico"
+        @click="isOpened = !isOpened"
+      />
       <img src="/no-avatar.jpg" width="50" class="avatar" />
       <p>Main</p>
       <p>Settings</p>
@@ -13,9 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "@vue/reactivity";
+import { ref } from '@vue/reactivity'
 
-const isOpened = ref(false);
+const isOpened = ref(false)
 </script>
 
 <style scoped>

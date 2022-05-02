@@ -3,7 +3,12 @@
     <div class="sidebar">
       <header>
         <div class="searchbar">
-          <input class="search-input" type="text" placeholder="Search" name="search" />
+          <input
+            class="search-input"
+            type="text"
+            placeholder="Search"
+            name="search"
+          />
           <button type="submit" class="search-btn">
             <img src="/search-glass.png" width="20" />
           </button>
@@ -18,18 +23,28 @@
       <div class="results-container"></div>
     </div>
 
-    <main class="main-container"></main>
+    <main class="main-container">
+      <Map />
+    </main>
   </div>
 </template>
+
+<script setup>
+import Map from './../components/Map.vue'
+</script>
 
 <style scoped>
 .main-row {
   min-height: 100vh;
-  /*flex: calc(100% - var(--sidebar-width));*/
   display: flex;
 }
+
+.main-container {
+  flex: calc(100% - var(--sidebar-width));
+}
+
 .sidebar {
-  min-width: var(--sidebar-width);
+  flex: var(--sidebar-width);
   margin: 0;
   padding: 1rem;
   background-color: var(--bg-secondary);
@@ -69,15 +84,22 @@
   max-height: 6rem;
   cursor: pointer;
 }
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 425px) {
+  .main-row {
+    flex-direction: column-reverse;
+  }
+
+  .main-container {
+    flex: 5;
+  }
+
+  .map {
+    min-height: 100%;
+  }
+
   .sidebar {
+    flex: 1;
     border-radius: 15px 15px 0 0;
-    position: absolute;
-    bottom: 0px;
-    margin-right: auto;
-    margin-left: auto;
-    left: 0px;
-    right: 0px;
   }
 }
 @media screen and (max-width: 330px) {
