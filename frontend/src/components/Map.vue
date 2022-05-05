@@ -62,10 +62,10 @@ export default defineComponent({
   },
   methods: {},
   mounted() {
-    this.map = L.map('map', { zoomControl: false }).setView(
-      [51.136708, 71.442031],
-      11
-    )
+    this.map = L.map('map', {
+      zoomControl: false,
+      attributionControl: false,
+    }).setView([51.136708, 71.442031], 11)
     this.map.setMaxBounds(this.map.getBounds())
     L.tileLayer
       .offline('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
