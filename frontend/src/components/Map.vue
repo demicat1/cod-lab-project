@@ -72,11 +72,12 @@ export default defineComponent({
       zoomControl: false,
       attributionControl: false,
     }).setView([51.136708, 71.442031], 11)
+
     navigator.geolocation.getCurrentPosition((position) => {
-      this.map.setView(
-        [position.coords.latitude, position.coords.longitude],
-        11
-      )
+      const userCords = [position.coords.latitude, position.coords.longitude]
+      this.map.setView(userCords, 11)
+      var userMarker = L.marker(userCords).addTo(this.map)
+      userMarker.bindPopup('<p>You</p>')
     })
 
     this.map.setMaxBounds(this.map.getBounds())
@@ -89,12 +90,15 @@ export default defineComponent({
 
     // Markers
 
-    this.marker = L.marker([51.1, 71.4]).addTo(this.map)
-    this.marker.bindPopup('<b>Hello world!</b><br>I am a popup.')
+    let markers
 
     axios.get('/carwash/getCoords').then((response) => {
-      const markers = response.data
-      //
+      markers = response.data
+      markers.forEach((m) => {
+        let marker
+        marker = L.marker([m['Latitude'], m['Longitude']]).addTo(this.map)
+        marker.bindPopup(`<p>${m['Name']}</p>`)
+      })
     })
   },
 })

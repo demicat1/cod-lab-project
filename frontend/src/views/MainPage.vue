@@ -14,7 +14,7 @@
           </button>
         </div>
         <div class="icons-container">
-          <img class="icon" src="/cog.png" alt="" />
+          <img class="icon" src="/cog.png" alt="" @click="" />
           <img class="icon" src="/spray.png" alt="" />
           <img class="icon" src="/tire.png" alt="" />
         </div>
@@ -31,6 +31,8 @@
 
 <script setup>
 import Map from './../components/Map.vue'
+
+//TODO clickable icon buttons showing up corresponding service markers
 </script>
 
 <style scoped>
