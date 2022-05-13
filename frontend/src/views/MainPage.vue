@@ -31,8 +31,6 @@
 
 <script setup>
 import Map from './../components/Map.vue'
-
-//TODO clickable icon buttons showing up corresponding service markers
 </script>
 
 <style scoped>

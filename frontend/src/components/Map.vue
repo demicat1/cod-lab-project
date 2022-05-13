@@ -14,7 +14,6 @@ export default defineComponent({
       map: null,
     }
   },
-  methods: {},
   mounted() {
     // Setting map
 
@@ -24,9 +23,13 @@ export default defineComponent({
     }).setView([51.136708, 71.442031], 11)
 
     navigator.geolocation.getCurrentPosition((position) => {
+      var userIcon = L.icon({
+        iconUrl: '../../public/user-marker-icon.png',
+      })
+
       const userCords = [position.coords.latitude, position.coords.longitude]
       this.map.setView(userCords, 11)
-      var userMarker = L.marker(userCords).addTo(this.map)
+      var userMarker = L.marker(userCords, { icon: userIcon }).addTo(this.map)
       userMarker.bindPopup('<p>You</p>')
     })
 
