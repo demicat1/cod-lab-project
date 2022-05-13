@@ -14,8 +14,8 @@
           </button>
         </div>
         <div class="icons-container">
-          <img class="icon" src="/cog.png" alt="" @click="" />
-          <img class="icon" src="/spray.png" alt="" />
+          <img class="icon" src="/cog.png" alt="" @click="map.getMarkers(0)" />
+          <img class="icon" src="/spray.png" alt="" @click="map.getMarkers(1)"/>
           <img class="icon" src="/tire.png" alt="" />
         </div>
       </header>
@@ -24,13 +24,16 @@
     </div>
 
     <main class="main-container">
-      <Map />
+      <Map ref="map" />
     </main>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref } from '@vue/reactivity';
 import Map from './../components/Map.vue'
+
+const map = ref() 
 </script>
 
 <style scoped>

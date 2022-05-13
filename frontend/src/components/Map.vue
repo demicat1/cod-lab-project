@@ -12,11 +12,11 @@ export default defineComponent({
   data() {
     return {
       map: null,
+      markers: []
     }
   },
   mounted() {
     // Setting map
-
     this.map = L.map('map', {
       zoomControl: false,
       attributionControl: false,
@@ -41,16 +41,22 @@ export default defineComponent({
       })
       .addTo(this.map)
 
-    // Markers
-
-    axios.get('/carwash/getCoords').then((response) => {
-      let markers = response.data
-      markers.forEach((m) => {
-        let marker = L.marker([m['Latitude'], m['Longitude']]).addTo(this.map)
-        marker.bindPopup(`<p>${m['Name']}</p>`)
-      })
-    })
+    this.getMarkers();
   },
+  methods: {
+    getMarkers(facilType = 0) {
+      axios.get(`/carwash/getCoords?type=${facilType}`).then((response) => {
+        this.markers.forEach((x) => this.map.removeLayer(x));
+        this.markers.length = 0;
+        let markersResp = response.data
+        markersResp.forEach((m) => {
+          let marker = L.marker([m['Latitude'], m['Longitude']]).addTo(this.map)
+          marker.bindPopup(`<p>${m['Name']}</p>`)
+          this.markers.push(marker);
+        })
+      })
+    }
+  }
 })
 </script>
 
