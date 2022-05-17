@@ -15,7 +15,12 @@
         </div>
         <div class="icons-container">
           <img class="icon" src="/cog.png" alt="" @click="map.getMarkers(0)" />
-          <img class="icon" src="/spray.png" alt="" @click="map.getMarkers(1)"/>
+          <img
+            class="icon"
+            src="/spray.png"
+            alt=""
+            @click="map.getMarkers(1)"
+          />
           <img class="icon" src="/tire.png" alt="" />
         </div>
       </header>
@@ -30,10 +35,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from '@vue/reactivity';
+import { ref } from '@vue/reactivity'
 import Map from './../components/Map.vue'
 
-const map = ref() 
+const map = ref()
 </script>
 
 <style scoped>
@@ -50,7 +55,7 @@ const map = ref()
   flex: var(--sidebar-width);
   margin: 0;
   padding: 1rem;
-  background-color: var(--bg-secondary);
+  background-color: var(--dark-primary);
 }
 .sidebar header {
   display: flex;

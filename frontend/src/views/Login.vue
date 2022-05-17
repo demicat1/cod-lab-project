@@ -90,7 +90,7 @@ body {
 .login-form {
   display: grid;
   place-items: center;
-  background-color: #d4cd87;
+  background-color: var(--primary);
   border-radius: 15px;
   /* width: 350px;
   height: 450px; */
@@ -112,7 +112,7 @@ body {
 ::placeholder {
   opacity: 75%;
   font-weight: 500;
-  color: #b9b37a;
+  color: var(--dark-primary);
 }
 
 .login-btn {
@@ -120,7 +120,7 @@ body {
   padding: 15px 30px;
   border-radius: 20px;
   border-style: none;
-  background-color: #87814e;
+  background-color: var(--darker-primary);
   color: #e5e5e5;
   transition: 0.5s;
   cursor: pointer;
@@ -128,13 +128,18 @@ body {
 }
 
 .login-btn:hover {
-  box-shadow: 0px 5px #504c2f;
+  box-shadow: 0px 5px var(--shadow);
 }
 
 .login-link {
   margin: 10px;
   font-weight: 400;
   color: #000000;
+  cursor: pointer;
+}
+
+.login-link:hover {
+  text-decoration: underline;
 }
 
 .login-form input,

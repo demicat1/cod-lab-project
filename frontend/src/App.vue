@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Sidebar from "./components/Sidebar.vue";
+import Sidebar from './components/Sidebar.vue'
 </script>
 
 <template>
@@ -15,8 +15,11 @@ import Sidebar from "./components/Sidebar.vue";
 }
 :root {
   font-size: 62.5%;
+  --primary: #d4cd87;
+  --dark-primary: #b9b37a;
+  --darker-primary: #87814e;
+  --shadow: #504c2f;
   --bg-primary: #c4c4c4;
-  --bg-secondary: #b9b37a;
   --sidebar-width: 320px;
 }
 * {
