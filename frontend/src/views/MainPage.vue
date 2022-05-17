@@ -1,7 +1,6 @@
 <template>
   <div class="main-row">
     <div class="sidebar">
-      <header>
         <div class="searchbar">
           <input
             class="search-input"
@@ -23,7 +22,6 @@
           />
           <img class="icon" src="/tire.png" alt="" />
         </div>
-      </header>
       <hr />
       <div class="info-list">
         <ul class="info-container">
@@ -42,47 +40,47 @@
           <li>Type:</li>
         </ul>
         <ul class="info-container">
-          <li>Name: 3</li>
+          <li>Name: 4</li>
           <li>Address:</li>
           <li>Type:</li>
         </ul>
         <ul class="info-container">
-          <li>Name: 3</li>
+          <li>Name: 5</li>
           <li>Address:</li>
           <li>Type:</li>
         </ul>
         <ul class="info-container">
-          <li>Name: 3</li>
+          <li>Name: 6</li>
           <li>Address:</li>
           <li>Type:</li>
         </ul>
         <ul class="info-container">
-          <li>Name: 3</li>
+          <li>Name: 7</li>
           <li>Address:</li>
           <li>Type:</li>
         </ul>
         <ul class="info-container">
-          <li>Name: 3</li>
+          <li>Name: 8</li>
           <li>Address:</li>
           <li>Type:</li>
         </ul>
         <ul class="info-container">
-          <li>Name: 3</li>
+          <li>Name: 9</li>
           <li>Address:</li>
           <li>Type:</li>
         </ul>
         <ul class="info-container">
-          <li>Name: 3</li>
+          <li>Name: 10</li>
           <li>Address:</li>
           <li>Type:</li>
         </ul>
         <ul class="info-container">
-          <li>Name: 3</li>
+          <li>Name: 11</li>
           <li>Address:</li>
           <li>Type:</li>
         </ul>
         <ul class="info-container">
-          <li>Name: 3</li>
+          <li>Name: 12</li>
           <li>Address:</li>
           <li>Type:</li>
         </ul>
@@ -114,9 +112,9 @@ const map = ref()
 }
 
 .info-list {
-  padding-inline: 10px;
+  max-height: 550px;
+  padding-right: 10px;
   overflow-y: scroll;
-  max-height: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -142,13 +140,13 @@ const map = ref()
   list-style: none;
   border: 2px solid #66583859;
   border-radius: 7px;
-  padding: 10px;
+  padding: 5px;
   margin-block: 10px;
   text-align: left;
 }
 
 .info-container li {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .sidebar {
@@ -159,10 +157,7 @@ const map = ref()
   padding: 1rem;
   background-color: var(--dark-primary);
 }
-.sidebar header {
-  display: flex;
-  flex-direction: column;
-}
+
 .searchbar {
   padding: 1rem;
   display: flex;
