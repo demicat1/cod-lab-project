@@ -28,63 +28,63 @@
       <div class="info-list">
         <ul class="info-container">
           <li>Name: 1</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
         <ul class="info-container">
           <li>Name: 2</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
         <ul class="info-container">
           <li>Name: 3</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
         <ul class="info-container">
           <li>Name: 3</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
         <ul class="info-container">
           <li>Name: 3</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
         <ul class="info-container">
           <li>Name: 3</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
         <ul class="info-container">
           <li>Name: 3</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
         <ul class="info-container">
           <li>Name: 3</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
         <ul class="info-container">
           <li>Name: 3</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
         <ul class="info-container">
           <li>Name: 3</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
         <ul class="info-container">
           <li>Name: 3</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
         <ul class="info-container">
           <li>Name: 3</li>
-          <li>Address: </li>
-          <li>Type: </li>
+          <li>Address:</li>
+          <li>Type:</li>
         </ul>
       </div>
       <div class="results-container"></div>
@@ -116,7 +116,7 @@ const map = ref()
 .info-list {
   padding-inline: 10px;
   overflow-y: scroll;
-  height:550px;
+  max-height: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -130,17 +130,17 @@ const map = ref()
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #9b8b59; 
+  background: #9b8b59;
   border-radius: 7px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #7d7048; 
+  background: #7d7048;
 }
 
 .info-container {
-  list-style:none;
-  border: 2px solid #66583859 ;
+  list-style: none;
+  border: 2px solid #66583859;
   border-radius: 7px;
   padding: 10px;
   margin-block: 10px;
@@ -152,6 +152,8 @@ const map = ref()
 }
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
   flex: var(--sidebar-width);
   margin: 0;
   padding: 1rem;
@@ -186,15 +188,15 @@ const map = ref()
 }
 .icon {
   margin: 1rem;
-}
-.icon {
   max-width: 6rem;
   max-height: 6rem;
   cursor: pointer;
 }
+
+hr {
+  min-width: 100%;
+}
 @media screen and (max-width: 425px) {
-
-
   .main-row {
     flex-direction: column-reverse;
   }
