@@ -25,6 +25,68 @@
         </div>
       </header>
       <hr />
+      <div class="info-list">
+        <ul class="info-container">
+          <li>Name: 1</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+        <ul class="info-container">
+          <li>Name: 2</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+        <ul class="info-container">
+          <li>Name: 3</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+        <ul class="info-container">
+          <li>Name: 3</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+        <ul class="info-container">
+          <li>Name: 3</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+        <ul class="info-container">
+          <li>Name: 3</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+        <ul class="info-container">
+          <li>Name: 3</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+        <ul class="info-container">
+          <li>Name: 3</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+        <ul class="info-container">
+          <li>Name: 3</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+        <ul class="info-container">
+          <li>Name: 3</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+        <ul class="info-container">
+          <li>Name: 3</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+        <ul class="info-container">
+          <li>Name: 3</li>
+          <li>Address: </li>
+          <li>Type: </li>
+        </ul>
+      </div>
       <div class="results-container"></div>
     </div>
 
@@ -49,6 +111,44 @@ const map = ref()
 
 .main-container {
   flex: calc(100% - var(--sidebar-width));
+}
+
+.info-list {
+  padding-inline: 10px;
+  overflow-y: scroll;
+  height:550px;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #aba46c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9b8b59; 
+  border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7d7048; 
+}
+
+.info-container {
+  list-style:none;
+  border: 2px solid #66583859 ;
+  border-radius: 7px;
+  padding: 10px;
+  margin-block: 10px;
+  text-align: left;
+}
+
+.info-container li {
+  font-size: 16px;
 }
 
 .sidebar {
@@ -93,6 +193,8 @@ const map = ref()
   cursor: pointer;
 }
 @media screen and (max-width: 425px) {
+
+
   .main-row {
     flex-direction: column-reverse;
   }
