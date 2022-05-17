@@ -1,19 +1,21 @@
 <template>
-  <div class="burger-ico" @click="isOpened = !isOpened">
-    <img src="/burger-menu.png" width="30" />
-  </div>
-  <div class="sidebar" :class="{ 'w-0': !isOpened }">
-    <template v-if="isOpened">
-      <img
-        src="/exit.png"
-        width="40"
-        class="close-ico"
-        @click="isOpened = !isOpened"
-      />
-      <img src="/no-avatar.jpg" width="50" class="avatar" />
-      <p>Main</p>
-      <p>Settings</p>
-    </template>
+  <div class="sidebar-component">
+    <div class="burger-ico" @click="isOpened = !isOpened">
+      <img src="/burger-menu.png" width="30" />
+    </div>
+    <div class="sidebar" :class="{ 'w-0': !isOpened }">
+      <template v-if="isOpened">
+        <img
+          src="/exit.png"
+          width="40"
+          class="close-ico"
+          @click="isOpened = !isOpened"
+        />
+        <img src="/no-avatar.jpg" width="50" class="avatar" />
+        <p>Main</p>
+        <p>Settings</p>
+      </template>
+    </div>
   </div>
 </template>
 
