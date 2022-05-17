@@ -1,28 +1,24 @@
 <template>
   <div class="main-row">
     <div class="sidebar">
-        <div class="searchbar">
-          <input
-            class="search-input"
-            type="text"
-            placeholder="Search"
-            name="search"
-          />
-          <button type="submit" class="search-btn">
-            <img src="/search-glass.png" width="20" />
-          </button>
-        </div>
-        <div class="icons-container">
-          <img class="icon" src="/cog.png" alt="" @click="map.getMarkers(0)" />
-          <img
-            class="icon"
-            src="/spray.png"
-            alt=""
-            @click="map.getMarkers(1)"
-          />
-          <img class="icon" src="/tire.png" alt="" />
-        </div>
+      <div class="searchbar">
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Search"
+          name="search"
+        />
+        <button type="submit" class="search-btn">
+          <img src="/search-glass.png" width="20" />
+        </button>
+      </div>
+      <div class="icons-container">
+        <img class="icon" src="/cog.png" alt="" @click="map.getMarkers(0)" />
+        <img class="icon" src="/spray.png" alt="" @click="map.getMarkers(1)" />
+        <img class="icon" src="/tire.png" alt="" />
+      </div>
       <hr />
+      <Filter />
       <div class="info-list">
         <ul class="info-container">
           <li>Name: 1</li>
@@ -97,6 +93,7 @@
 <script setup lang="ts">
 import { ref } from '@vue/reactivity'
 import Map from './../components/Map.vue'
+import Filter from './../components/Filter.vue'
 
 const map = ref()
 </script>
@@ -177,7 +174,6 @@ const map = ref()
   cursor: pointer;
 }
 .icons-container {
-  flex-grow: 1;
   display: flex;
   justify-content: space-evenly;
 }
