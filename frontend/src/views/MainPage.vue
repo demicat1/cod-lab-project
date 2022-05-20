@@ -18,7 +18,7 @@
         <img class="icon" src="/tire.png" alt="" />
       </div>
       <hr />
-      <Filter />
+      <Sort />
       <div class="info-list">
         <ul class="info-container">
           <li>Name: 1</li>
@@ -93,7 +93,7 @@
 <script setup lang="ts">
 import { ref } from '@vue/reactivity'
 import Map from './../components/Map.vue'
-import Filter from './../components/Filter.vue'
+import Sort from './../components/Sort.vue'
 
 const map = ref()
 </script>
@@ -105,7 +105,7 @@ const map = ref()
 }
 
 .main-container {
-  flex: calc(100% - var(--sidebar-width));
+  flex: 1;
 }
 
 .info-list {
@@ -149,7 +149,7 @@ const map = ref()
 .sidebar {
   display: flex;
   flex-direction: column;
-  flex: var(--sidebar-width);
+  flex-basis: var(--sidebar-width);
   margin: 0;
   padding: 1rem;
   background-color: var(--dark-primary);

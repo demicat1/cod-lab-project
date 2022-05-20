@@ -20,7 +20,7 @@ import Sidebar from './components/Sidebar.vue'
   --darker-primary: #87814e;
   --shadow: #504c2f;
   --bg-primary: #c4c4c4;
-  --sidebar-width: 320px;
+  --sidebar-width: 400px;
 }
 * {
   font-family: Verdana;
