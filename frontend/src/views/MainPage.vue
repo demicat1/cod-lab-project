@@ -20,70 +20,56 @@
       <hr />
       <Sort />
       <div class="info-list">
-        <ul class="info-container">
+        <ServiceItem ref="serviceItem" />
+        <button class="info-container">
           <li>Name: 1</li>
-          <li>Address:</li>
+          <li>Address: 9</li>
           <li>Type:</li>
-        </ul>
-        <ul class="info-container">
+        </button>
+        <button class="info-container">
           <li>Name: 2</li>
-          <li>Address:</li>
+          <li>Address: 8</li>
           <li>Type:</li>
-        </ul>
-        <ul class="info-container">
+        </button>
+        <button class="info-container">
           <li>Name: 3</li>
-          <li>Address:</li>
+          <li>Address: 7</li>
           <li>Type:</li>
-        </ul>
-        <ul class="info-container">
+        </button>
+        <button class="info-container">
           <li>Name: 4</li>
-          <li>Address:</li>
+          <li>Address: 6</li>
           <li>Type:</li>
-        </ul>
-        <ul class="info-container">
+        </button>
+        <button class="info-container">
           <li>Name: 5</li>
-          <li>Address:</li>
+          <li>Address: 5</li>
           <li>Type:</li>
-        </ul>
-        <ul class="info-container">
+        </button>
+        <button class="info-container">
           <li>Name: 6</li>
-          <li>Address:</li>
+          <li>Address: 4</li>
           <li>Type:</li>
-        </ul>
-        <ul class="info-container">
+        </button>
+        <button class="info-container">
           <li>Name: 7</li>
-          <li>Address:</li>
+          <li>Address: 3</li>
           <li>Type:</li>
-        </ul>
-        <ul class="info-container">
+        </button>
+        <button class="info-container">
           <li>Name: 8</li>
-          <li>Address:</li>
+          <li>Address: 2</li>
           <li>Type:</li>
-        </ul>
-        <ul class="info-container">
+        </button>
+        <button class="info-container" @click="">
           <li>Name: 9</li>
-          <li>Address:</li>
+          <li>Address: 1</li>
           <li>Type:</li>
-        </ul>
-        <ul class="info-container">
-          <li>Name: 10</li>
-          <li>Address:</li>
-          <li>Type:</li>
-        </ul>
-        <ul class="info-container">
-          <li>Name: 11</li>
-          <li>Address:</li>
-          <li>Type:</li>
-        </ul>
-        <ul class="info-container">
-          <li>Name: 12</li>
-          <li>Address:</li>
-          <li>Type:</li>
-        </ul>
+        </button>
       </div>
       <div class="results-container"></div>
+      <Booking />
     </div>
-
     <main class="main-container">
       <Map ref="map" />
     </main>
@@ -94,8 +80,11 @@
 import { ref } from '@vue/reactivity'
 import Map from './../components/Map.vue'
 import Sort from './../components/Sort.vue'
+import Booking from './Booking.vue'
+import ServiceItem from './../components/ServiceItem.vue'
 
 const map = ref()
+const serviceItem = ref()
 </script>
 
 <style scoped>
@@ -135,11 +124,14 @@ const map = ref()
 
 .info-container {
   list-style: none;
+  width: 100%;
+  background-color: transparent;
   border: 2px solid #66583859;
   border-radius: 7px;
   padding: 5px;
-  margin-block: 10px;
+  margin: 0.5rem 0 0.5rem 0;
   text-align: left;
+  cursor: pointer;
 }
 
 .info-container li {
@@ -182,6 +174,10 @@ const map = ref()
   max-width: 6rem;
   max-height: 6rem;
   cursor: pointer;
+}
+
+.info-container:hover {
+  background-color: #aba46c;
 }
 
 hr {

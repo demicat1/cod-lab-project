@@ -9,17 +9,8 @@ function getCoords(req, res, next) {
       : facilTypes[0]
 
   db.any(
-    `
-    SELECT 
-    "Facilities"."Latitude", 
-    "Facilities"."Longitude", 
-    "Facilities"."Name", 
-    "Facilities"."Address", 
-    "Facilities"."Rating", 
-    "Facilities"."WorkdayEndHours", 
-    "Facilities"."WorkdayStartHours"
-    FROM "${facilType}" JOIN "Facilities" ON "Facilities"."Id" = "${facilType}"."Id"
-    `
+    `SELECT "Facilities"."Latitude", "Facilities"."Longitude", "Facilities"."Name" FROM "${facilType}"
+     JOIN "Facilities" ON "Facilities"."Id" = "${facilType}"."Id"`
   )
     .then(function (data) {
       res.status(200).json(data)

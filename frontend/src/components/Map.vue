@@ -19,12 +19,12 @@ export default defineComponent({
     // Setting map
     this.map = L.map('map', {
       zoomControl: false,
-      attributionControl: false,
+      attributionControl: false
     }).setView([51.136708, 71.442031], 11)
 
     navigator.geolocation.getCurrentPosition((position) => {
       var userIcon = L.icon({
-        iconUrl: '../../public/user-marker-icon.png',
+        iconUrl: '/user-marker-icon.png'
       })
 
       const userCords = [position.coords.latitude, position.coords.longitude]
@@ -37,22 +37,22 @@ export default defineComponent({
 
     L.tileLayer
       .offline('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
-        maximumAge: 2629800000,
+        maximumAge: 2629800000
       })
       .addTo(this.map)
 
-    this.getMarkers();
+    this.getMarkers()
   },
   methods: {
     getMarkers(facilType = 0) {
       axios.get(`/carwash/getCoords?type=${facilType}`).then((response) => {
-        this.markers.forEach((x) => this.map.removeLayer(x));
-        this.markers.length = 0;
+        this.markers.forEach((x) => this.map.removeLayer(x))
+        this.markers.length = 0
         let markersResp = response.data
         markersResp.forEach((m) => {
           let marker = L.marker([m['Latitude'], m['Longitude']]).addTo(this.map)
           marker.bindPopup(`<p>${m['Name']}</p>`)
-          this.markers.push(marker);
+          this.markers.push(marker)
         })
       })
     }

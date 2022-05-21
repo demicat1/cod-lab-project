@@ -15,13 +15,13 @@
 import SortDropdown from './SortDropdown.vue'
 
 export default {
-  name: 'sort',
+  name: 'Sort',
   components: {
     SortDropdown
   },
   data() {
     return {
-      options: [{ label: 'name' }, { label: 'rating' }],
+      options: ['name', 'rating'],
       ascendingOrder: false
     }
   }

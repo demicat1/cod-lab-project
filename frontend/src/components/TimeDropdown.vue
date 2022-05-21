@@ -1,6 +1,6 @@
 <template>
-  <div class="sort-dropdown" @click="isOpen = !isOpen">
-    <button class="sort-btn">Sort by</button>
+  <div class="time-dropdown" @click="isOpen = !isOpen">
+    <button class="time-btn">Time</button>
     <div class="drop-list" v-if="isOpen">
       <div class="drop-item" v-for="item in items">
         <button>{{ item }}</button>
@@ -11,7 +11,7 @@
 
 <script lang="ts">
 export default {
-  name: 'SortDropdown',
+  name: 'TimeDropdown',
   props: ['items'],
   data() {
     return {
@@ -22,16 +22,17 @@ export default {
 </script>
 
 <style scoped>
-.sort-btn {
+.time-btn {
   background-color: #9b8b59;
   border: 0;
   padding: 0.5rem;
   padding-inline: 2rem;
   border-radius: 5rem;
   cursor: pointer;
+  margin: 0.5rem;
 }
 
-.sort-btn:hover {
+.time-btn:hover {
   background-color: #7d7048;
 }
 
