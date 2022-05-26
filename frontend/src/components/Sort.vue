@@ -1,10 +1,24 @@
 <template>
   <div class="sort-container">
-    <SortDropdown :items="options" />
+    <span>Sort by</span>
+    <SortDropdown
+      :selected="selectedProp"
+      :items="options"
+      @selectItm="
+        selectedProp = $event;
+        $emit('selSort', { prop: $event, asc: ascendingOrder });
+      "
+    />
     <div class="order-container">
       <span>in</span>
-      <button class="order-btn" @click="ascendingOrder = !ascendingOrder">
-        {{ ascendingOrder ? 'Descending' : 'Ascending' }}
+      <button
+        class="order-btn"
+        @click="
+          ascendingOrder = !ascendingOrder;
+          $emit('selSort', { prop: selectedProp, asc: ascendingOrder });
+        "
+      >
+        {{ ascendingOrder ? "Ascending" : "Descending" }}
       </button>
       <span>order</span>
     </div>
@@ -12,20 +26,22 @@
 </template>
 
 <script lang="ts">
-import SortDropdown from './SortDropdown.vue'
+import SortDropdown from "./SortDropdown.vue";
 
 export default {
-  name: 'Sort',
+  name: "Sort",
+  emits: ["selSort"],
   components: {
-    SortDropdown
+    SortDropdown,
   },
   data() {
     return {
-      options: ['name', 'rating'],
-      ascendingOrder: false
-    }
-  }
-}
+      options: ["name", "rating"],
+      ascendingOrder: true,
+      selectedProp: "name",
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -38,12 +54,14 @@ export default {
 
 .sort-container span {
   text-align: center;
-  margin-inline: 0.5rem;
+  padding-inline: 0.5rem;
+  font-size: 1.3rem !important;
+  font-weight: bold;
 }
 
 .order-container {
   /* border: 1px solid #000; */
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 0;
 }
 
 .order-btn {

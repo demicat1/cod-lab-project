@@ -1,44 +1,58 @@
 <template>
-  <div>
-    <ul class="short-info">
-      <li>{{ items }}</li>
-      <!-- <li>{{ items[0]['address'] }}</li>
-      <li>{{ items[0]['type'] }}</li> -->
-    </ul>
-  </div>
+  <button class="info-container" v-for="itm in items" :key="itm.name">
+    <li>Name: {{ itm.name }}</li>
+    <li>Address: {{ itm.address }}</li>
+    <li>Rating: 0</li>
+  </button>
 </template>
 
-<script>
-import axios, { AxiosError, AxiosResponse } from 'axios'
-import { defineComponent } from 'vue'
+<script setup>
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { reactive, ref } from "vue";
 
-export default defineComponent({
-  name: 'ServiceItem',
-  data() {
-    return {
-      items: []
+const items = reactive([]);
+
+function sortItems(param = "name", ascending = true) {
+  items.sort((a, b) => {
+    if (ascending) {
+      if (a[param] > b[param]) {
+        return 1;
+      }
+      if (a[param] < b[param]) {
+        return -1;
+      }
     }
-  },
-  methods: {
-    getFacilData(facilType = 0) {
-      axios.get(`/carwash/getCoords?type=${facilType}`).then((response) => {
-        let itemsResp = response.data
-        itemsResp.forEach((i) => {
-          let item = {
-            name: i['Name'],
-            address: i['Address'],
-            type: facilType
-          }
-          this.items.push(item)
-        })
-      })
+    if (!ascending) {
+      if (a[param] < b[param]) {
+        return 1;
+      }
+      if (a[param] > b[param]) {
+        return -1;
+      }
     }
-  },
-  mounted() {
-    this.getFacilData(0)
-    this.getFacilData(1)
-  }
-})
+    return 0;
+  });
+}
+
+function getFacilData(facilType = 0) {
+  axios.get(`/carwash/getCoords?type=${facilType}`).then((response) => {
+    let itemsResp = response.data;
+    itemsResp.forEach((i) => {
+      let item = {
+        name: i["Name"],
+        address: i["Address"],
+        type: facilType,
+      };
+      items.push(item);
+    });
+    sortItems();
+  });
+}
+
+getFacilData(1);
+
+const vlay = ref('1')
+defineExpose({ sortItems, vlay });
 </script>
 
 <style scoped>
@@ -53,5 +67,17 @@ export default defineComponent({
 
 .short-info li {
   font-size: 14px;
+}
+
+.info-container {
+  list-style: none;
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid #66583859;
+  border-radius: 7px;
+  padding: 5px;
+  margin: 0.5rem 0 0.5rem 0;
+  text-align: left;
+  cursor: pointer;
 }
 </style>

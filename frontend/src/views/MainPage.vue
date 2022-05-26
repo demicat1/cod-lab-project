@@ -2,12 +2,7 @@
   <div class="main-row">
     <div class="sidebar">
       <div class="searchbar">
-        <input
-          class="search-input"
-          type="text"
-          placeholder="Search"
-          name="search"
-        />
+        <input class="search-input" type="text" placeholder="Search" name="search" />
         <button type="submit" class="search-btn">
           <img src="/search-glass.png" width="20" />
         </button>
@@ -18,54 +13,9 @@
         <img class="icon" src="/tire.png" alt="" />
       </div>
       <hr />
-      <Sort />
+      <Sort @selSort="servi.sortItems($event.prop, $event.asc)" :callback="'$refs.servi.sortItems'" />
       <div class="info-list">
-        <ServiceItem ref="serviceItem" />
-        <button class="info-container">
-          <li>Name: 1</li>
-          <li>Address: 9</li>
-          <li>Type:</li>
-        </button>
-        <button class="info-container">
-          <li>Name: 2</li>
-          <li>Address: 8</li>
-          <li>Type:</li>
-        </button>
-        <button class="info-container">
-          <li>Name: 3</li>
-          <li>Address: 7</li>
-          <li>Type:</li>
-        </button>
-        <button class="info-container">
-          <li>Name: 4</li>
-          <li>Address: 6</li>
-          <li>Type:</li>
-        </button>
-        <button class="info-container">
-          <li>Name: 5</li>
-          <li>Address: 5</li>
-          <li>Type:</li>
-        </button>
-        <button class="info-container">
-          <li>Name: 6</li>
-          <li>Address: 4</li>
-          <li>Type:</li>
-        </button>
-        <button class="info-container">
-          <li>Name: 7</li>
-          <li>Address: 3</li>
-          <li>Type:</li>
-        </button>
-        <button class="info-container">
-          <li>Name: 8</li>
-          <li>Address: 2</li>
-          <li>Type:</li>
-        </button>
-        <button class="info-container" @click="">
-          <li>Name: 9</li>
-          <li>Address: 1</li>
-          <li>Type:</li>
-        </button>
+        <ServiceItem ref="servi" />
       </div>
       <div class="results-container"></div>
       <Booking />
@@ -76,15 +26,15 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from '@vue/reactivity'
-import Map from './../components/Map.vue'
-import Sort from './../components/Sort.vue'
-import Booking from './Booking.vue'
-import ServiceItem from './../components/ServiceItem.vue'
+<script setup>
+import { ref } from "vue";
+import Map from "./../components/Map.vue";
+import Sort from "./../components/Sort.vue";
+import Booking from "./Booking.vue";
+import ServiceItem from "./../components/ServiceItem.vue";
 
-const map = ref()
-const serviceItem = ref()
+const map = ref();
+const servi = ref();
 </script>
 
 <style scoped>

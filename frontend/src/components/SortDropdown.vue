@@ -1,9 +1,9 @@
 <template>
   <div class="sort-dropdown" @click="isOpen = !isOpen">
-    <button class="sort-btn">Sort by</button>
+    <button class="sort-btn">{{ selected }}</button>
     <div class="drop-list" v-if="isOpen">
       <div class="drop-item" v-for="item in items">
-        <button>{{ item }}</button>
+        <button @click="$emit('selectItm', item)">{{ item }}</button>
       </div>
     </div>
   </div>
@@ -12,7 +12,8 @@
 <script lang="ts">
 export default {
   name: 'SortDropdown',
-  props: ['items'],
+  props: ['items', 'selected'],
+  emits: ['selectItm'],
   data() {
     return {
       isOpen: false
