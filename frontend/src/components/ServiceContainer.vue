@@ -1,9 +1,9 @@
 <template>
-  <ul class="shortInfo">
+  <button class="shortInfo">
     <li>Name: 1</li>
     <li>Address: 12</li>
     <li>Type:</li>
-  </ul>
+  </button>
 </template>
 
 <script lang="ts">
@@ -15,11 +15,14 @@ export default {
 <style scoped>
 .shortInfo {
   list-style: none;
+  width: 100%;
+  background-color: transparent;
   border: 2px solid #66583859;
   border-radius: 7px;
   padding: 5px;
-  margin-block: 10px;
+  margin: 0.5rem 0 0.5rem 0;
   text-align: left;
+  cursor: pointer;
 }
 
 .shortInfo li {
