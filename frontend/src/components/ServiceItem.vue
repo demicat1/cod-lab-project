@@ -1,58 +1,83 @@
 <template>
-  <button class="info-container" v-for="itm in items" :key="itm.name">
+  <button class="info-item" v-for="itm in items" :key="itm.name">
     <li>Name: {{ itm.name }}</li>
     <li>Address: {{ itm.address }}</li>
+    <li>Rating: 0</li>
+  </button>
+  <button class="info-item">
+    <li>Name: Lorem 1</li>
+    <li>Adress: Ipsum 1</li>
+    <li>Rating: 0</li>
+  </button>
+  <button class="info-item">
+    <li>Name: Lorem 2</li>
+    <li>Adress: Ipsum 2</li>
+    <li>Rating: 0</li>
+  </button>
+  <button class="info-item">
+    <li>Name: Lorem 3</li>
+    <li>Adress: Ipsum 3</li>
+    <li>Rating: 0</li>
+  </button>
+  <button class="info-item">
+    <li>Name: Lorem 4</li>
+    <li>Adress: Ipsum 4</li>
+    <li>Rating: 0</li>
+  </button>
+  <button class="info-item">
+    <li>Name: Lorem 5</li>
+    <li>Adress: Ipsum 5</li>
     <li>Rating: 0</li>
   </button>
 </template>
 
 <script setup>
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { reactive, ref } from "vue";
+import axios, { AxiosError, AxiosResponse } from 'axios'
+import { reactive, ref } from 'vue'
 
-const items = reactive([]);
+const items = reactive([])
 
-function sortItems(param = "name", ascending = true) {
+function sortItems(param = 'name', ascending = true) {
   items.sort((a, b) => {
     if (ascending) {
       if (a[param] > b[param]) {
-        return 1;
+        return 1
       }
       if (a[param] < b[param]) {
-        return -1;
+        return -1
       }
     }
     if (!ascending) {
       if (a[param] < b[param]) {
-        return 1;
+        return 1
       }
       if (a[param] > b[param]) {
-        return -1;
+        return -1
       }
     }
-    return 0;
-  });
+    return 0
+  })
 }
 
 function getFacilData(facilType = 0) {
   axios.get(`/carwash/getCoords?type=${facilType}`).then((response) => {
-    let itemsResp = response.data;
+    let itemsResp = response.data
     itemsResp.forEach((i) => {
       let item = {
-        name: i["Name"],
-        address: i["Address"],
-        type: facilType,
-      };
-      items.push(item);
-    });
-    sortItems();
-  });
+        name: i['Name'],
+        address: i['Address'],
+        type: facilType
+      }
+      items.push(item)
+    })
+    sortItems()
+  })
 }
 
-getFacilData(1);
+getFacilData(1)
 
 const vlay = ref('1')
-defineExpose({ sortItems, vlay });
+defineExpose({ sortItems, vlay })
 </script>
 
 <style scoped>
@@ -69,7 +94,7 @@ defineExpose({ sortItems, vlay });
   font-size: 14px;
 }
 
-.info-container {
+.info-item {
   list-style: none;
   width: 100%;
   background-color: transparent;
@@ -79,5 +104,13 @@ defineExpose({ sortItems, vlay });
   margin: 0.5rem 0 0.5rem 0;
   text-align: left;
   cursor: pointer;
+}
+
+.info-item:hover {
+  background-color: #aba46c;
+}
+
+.info-item li {
+  font-size: 1.7rem;
 }
 </style>

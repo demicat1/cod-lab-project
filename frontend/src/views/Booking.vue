@@ -29,7 +29,12 @@ export default {
         'Saturday',
         'Sunday'
       ],
-      time: []
+      time: [
+        '09:00-11:00',
+        '11:00-13:00',
+        '14:00-16:00',
+        '16:00-18:00'
+      ]
     }
   }
 }
@@ -37,14 +42,25 @@ export default {
 
 <style scoped>
 .booking-container {
-  display: none;
+  display: flex;
   flex-direction: column;
-  flex-basis: 300px;
-  padding: 2rem;
+  min-height: 200px;
+  overflow-y: scroll;
 }
 
 .booking-container h1,
 p {
   margin: 0.5rem;
+}
+
+.book-btn{
+  background-color:#6CABB3;
+  border: 0;
+  padding: 0.5rem;
+  padding-inline: 2rem;
+  border-radius: 5rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  align-self: center  ;
 }
 </style>

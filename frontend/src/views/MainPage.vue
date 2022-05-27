@@ -1,40 +1,57 @@
 <template>
   <div class="main-row">
     <div class="sidebar">
-      <div class="searchbar">
-        <input class="search-input" type="text" placeholder="Search" name="search" />
-        <button type="submit" class="search-btn">
-          <img src="/search-glass.png" width="20" />
-        </button>
-      </div>
-      <div class="icons-container">
-        <img class="icon" src="/cog.png" alt="" @click="map.getMarkers(0)" />
-        <img class="icon" src="/spray.png" alt="" @click="map.getMarkers(1)" />
-        <img class="icon" src="/tire.png" alt="" />
+      <div class="sidebar-top">
+        <div class="searchbar">
+          <input
+            class="search-input"
+            type="text"
+            placeholder="Search"
+            name="search"
+          />
+          <button type="submit" class="search-btn">
+            <img src="/search-glass.png" width="20" />
+          </button>
+        </div>
+        <div class="icons-container">
+          <img class="icon" src="/cog.png" alt="" @click="map.getMarkers(0)" />
+          <img
+            class="icon"
+            src="/spray.png"
+            alt=""
+            @click="map.getMarkers(1)"
+          />
+          <img class="icon" src="/tire.png" alt="" />
+        </div>
       </div>
       <hr />
-      <Sort @selSort="servi.sortItems($event.prop, $event.asc)" :callback="'$refs.servi.sortItems'" />
-      <div class="info-list">
-        <ServiceItem ref="servi" />
+      <div class="info-container">
+        <Sort
+          @selSort="servi.sortItems($event.prop, $event.asc)"
+          :callback="'$refs.servi.sortItems'"
+        />
+        <div class="info-list">
+          <ServiceItem ref="servi" />
+        </div>
       </div>
-      <div class="results-container"></div>
+      <hr />
       <Booking />
     </div>
-    <main class="main-container">
+    <div class="main-container">
       <Map ref="map" />
-    </main>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import Map from "./../components/Map.vue";
-import Sort from "./../components/Sort.vue";
-import Booking from "./Booking.vue";
-import ServiceItem from "./../components/ServiceItem.vue";
+import { ref } from 'vue'
+import Map from './../components/Map.vue'
+import Sort from './../components/Sort.vue'
+import Booking from './Booking.vue'
+import ServiceItem from './../components/ServiceItem.vue'
 
-const map = ref();
-const servi = ref();
+const map = ref()
+const servi = ref()
 </script>
 
 <style scoped>
@@ -44,59 +61,23 @@ const servi = ref();
 }
 
 .main-container {
-  flex: 1;
-}
-
-.info-list {
-  max-height: 550px;
-  padding-right: 10px;
-  overflow-y: scroll;
-}
-
-::-webkit-scrollbar {
-  width: 13px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background-color: #aba46c;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #9b8b59;
-  border-radius: 7px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #7d7048;
-}
-
-.info-container {
-  list-style: none;
-  width: 100%;
-  background-color: transparent;
-  border: 2px solid #66583859;
-  border-radius: 7px;
-  padding: 5px;
-  margin: 0.5rem 0 0.5rem 0;
-  text-align: left;
-  cursor: pointer;
-}
-
-.info-container li {
-  font-size: 14px;
+  flex: 3 0;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  flex-basis: var(--sidebar-width);
+  flex: 0 1 400px;
+  max-height: 100vh;
   margin: 0;
   padding: 1rem;
   background-color: var(--dark-primary);
 }
-
+.sidebar-top {
+  flex: 0 1 100px;
+  display: flex;
+  flex-direction: column;
+}
 .searchbar {
   padding: 1rem;
   display: flex;
@@ -126,42 +107,58 @@ const servi = ref();
   cursor: pointer;
 }
 
-.info-container:hover {
+hr {
+  min-width: 100%;
+  margin-block: 3px;
+}
+
+.info-container {
+  flex: 0 1 500px;
+  display: flex;
+  flex-direction: column;
+  margin-block: 1rem;
+}
+
+.info-list {
+  flex: 0 1 500px;
+  padding-right: 1rem;
+  overflow-y: scroll;
+  /* border-top: 1px solid #7d7048;
+  border-bottom: 1px solid #7d7048; */
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
   background-color: #aba46c;
 }
 
-hr {
-  min-width: 100%;
+::-webkit-scrollbar-thumb {
+  background: #9b8b59;
+  border-radius: 7px;
 }
-@media screen and (max-width: 425px) {
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7d7048;
+}
+
+@media screen and (max-width: 800px) {
   .main-row {
     flex-direction: column-reverse;
   }
 
   .main-container {
-    flex: 5;
-  }
-
-  .map {
-    min-height: 100%;
+    min-height: 67vh;
   }
 
   .sidebar {
-    flex: 1;
+    min-height: 33vh;
     border-radius: 15px 15px 0 0;
+    overflow-y: scroll;
   }
-}
-@media screen and (max-width: 330px) {
-  .icons-container img {
-    margin-inline: 5px;
-    width: 55px;
-  }
-}
-.results-container {
-  min-height: auto;
-}
-.results-container p {
-  font-size: 1.5rem;
-  overflow: auto;
 }
 </style>

@@ -62,13 +62,13 @@ export default defineComponent({
 
 <style>
 #map {
+  min-height: 100vh;
   width: 100%;
-  min-height: 100%;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 800px) {
   #map {
-    min-height: 80vh;
+    min-height: 67vh;
   }
 }
 </style>
