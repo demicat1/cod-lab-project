@@ -31,11 +31,11 @@
           :callback="'$refs.servi.sortItems'"
         />
         <div class="info-list">
-          <ServiceItem ref="servi" />
+          <ServiceItem ref="servi" @serviceSelected="isBooking = true" v-if="!isBooking" />
         </div>
       </div>
       <hr />
-      <Booking />
+      <Booking v-if="isBooking" />
     </div>
     <div class="main-container">
       <Map ref="map" />
@@ -52,6 +52,8 @@ import ServiceItem from './../components/ServiceItem.vue'
 
 const map = ref()
 const servi = ref()
+const isBooking = ref(false)
+
 </script>
 
 <style scoped>
@@ -72,6 +74,7 @@ const servi = ref()
   margin: 0;
   padding: 1rem;
   background-color: var(--dark-primary);
+  overflow-y: auto;
 }
 .sidebar-top {
   flex: 0 1 100px;

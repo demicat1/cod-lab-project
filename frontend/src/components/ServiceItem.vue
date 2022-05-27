@@ -1,5 +1,5 @@
 <template>
-  <button class="info-item" v-for="itm in items" :key="itm.name">
+  <button class="info-item" v-for="itm in items" :key="itm.name" @click="$emit('serviceSelected')">
     <li>Name: {{ itm.name }}</li>
     <li>Address: {{ itm.address }}</li>
     <li>Rating: 0</li>
@@ -34,9 +34,10 @@
 <script setup>
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { reactive, ref } from 'vue'
+defineEmits(['serviceSelected'])
 
 const items = reactive([])
-
+//  emits: ["serviceSelected"],
 function sortItems(param = 'name', ascending = true) {
   items.sort((a, b) => {
     if (ascending) {
