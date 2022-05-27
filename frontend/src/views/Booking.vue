@@ -45,7 +45,6 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 200px;
-  overflow-y: scroll;
 }
 
 .booking-container h1,
