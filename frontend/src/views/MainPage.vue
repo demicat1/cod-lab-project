@@ -2,7 +2,12 @@
   <div class="main-row">
     <div class="sidebar">
       <div class="searchbar">
-        <input class="search-input" type="text" placeholder="Search" name="search" />
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Search"
+          name="search"
+        />
         <button type="submit" class="search-btn">
           <img src="/search-glass.png" width="20" />
         </button>
@@ -13,11 +18,13 @@
         <img class="icon" src="/tire.png" alt="" />
       </div>
       <hr />
-      <Sort @selSort="servi.sortItems($event.prop, $event.asc)" :callback="'$refs.servi.sortItems'" />
+      <Sort
+        @selSort="servi.sortItems($event.prop, $event.asc)"
+        :callback="'$refs.servi.sortItems'"
+      />
       <div class="info-list">
         <ServiceItem ref="servi" />
       </div>
-      <div class="results-container"></div>
       <Booking />
     </div>
     <main class="main-container">
@@ -27,14 +34,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import Map from "./../components/Map.vue";
-import Sort from "./../components/Sort.vue";
-import Booking from "./Booking.vue";
-import ServiceItem from "./../components/ServiceItem.vue";
+import { ref } from 'vue'
+import Map from './../components/Map.vue'
+import Sort from './../components/Sort.vue'
+import Booking from './Booking.vue'
+import ServiceItem from './../components/ServiceItem.vue'
 
-const map = ref();
-const servi = ref();
+const map = ref()
+const servi = ref()
 </script>
 
 <style scoped>
@@ -45,47 +52,6 @@ const servi = ref();
 
 .main-container {
   flex: 1;
-}
-
-.info-list {
-  max-height: 550px;
-  padding-right: 10px;
-  overflow-y: scroll;
-}
-
-::-webkit-scrollbar {
-  width: 13px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background-color: #aba46c;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #9b8b59;
-  border-radius: 7px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #7d7048;
-}
-
-.info-container {
-  list-style: none;
-  width: 100%;
-  background-color: transparent;
-  border: 2px solid #66583859;
-  border-radius: 7px;
-  padding: 5px;
-  margin: 0.5rem 0 0.5rem 0;
-  text-align: left;
-  cursor: pointer;
-}
-
-.info-container li {
-  font-size: 14px;
 }
 
 .sidebar {
@@ -126,13 +92,37 @@ const servi = ref();
   cursor: pointer;
 }
 
-.info-container:hover {
-  background-color: #aba46c;
-}
-
 hr {
   min-width: 100%;
 }
+
+.info-list {
+  max-height: 500px;
+  padding: 10px 10px 10px 0px;
+  overflow-y: scroll;
+  border-top: 1px solid #7d7048;
+  border-bottom: 1px solid #7d7048;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #aba46c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9b8b59;
+  border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7d7048;
+}
+
 @media screen and (max-width: 425px) {
   .main-row {
     flex-direction: column-reverse;
@@ -151,17 +141,11 @@ hr {
     border-radius: 15px 15px 0 0;
   }
 }
+
 @media screen and (max-width: 330px) {
   .icons-container img {
     margin-inline: 5px;
     width: 55px;
   }
-}
-.results-container {
-  min-height: auto;
-}
-.results-container p {
-  font-size: 1.5rem;
-  overflow: auto;
 }
 </style>

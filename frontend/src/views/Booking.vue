@@ -37,14 +37,26 @@ export default {
 
 <style scoped>
 .booking-container {
-  display: none;
+  display: flex;
   flex-direction: column;
-  flex-basis: 300px;
+  flex: 0 0 50px;
+  max-height: 200px;
   padding: 2rem;
 }
 
 .booking-container h1,
 p {
   margin: 0.5rem;
+}
+
+.book-btn{
+  background-color:#6CABB3;
+  border: 0;
+  padding: 0.5rem;
+  padding-inline: 2rem;
+  border-radius: 5rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  align-self: center  ;
 }
 </style>
