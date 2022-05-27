@@ -72,6 +72,7 @@ const servi = ref()
   margin: 0;
   padding: 1rem;
   background-color: var(--dark-primary);
+  overflow-y: scroll;
 }
 .sidebar-top {
   flex: 0 1 100px;
