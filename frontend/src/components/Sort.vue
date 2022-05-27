@@ -49,7 +49,6 @@ export default {
   display: flex;
   align-self: baseline;
   align-items: center;
-  margin-block: 1rem;
 }
 
 .sort-container span {

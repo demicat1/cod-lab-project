@@ -1,11 +1,16 @@
 <template>
-  <div class="time-dropdown" @click="isOpen = !isOpen">
+  <!-- <div class="time-dropdown" @click="isOpen = !isOpen">
     <button class="time-btn">Time</button>
     <div class="drop-list" v-if="isOpen">
       <div class="drop-item" v-for="item in items">
         <button>{{ item }}</button>
       </div>
     </div>
+  </div> -->
+  <div class="time-select">
+    <select name="time-select">
+      <option value="" v-for="item in items">{{ item }}</option>
+    </select>
   </div>
 </template>
 
@@ -22,6 +27,10 @@ export default {
 </script>
 
 <style scoped>
+select .day-select {
+  max-width: fit-content;
+}
+
 .time-btn {
   background-color: #9b8b59;
   border: 0;

@@ -1,35 +1,45 @@
 <template>
   <div class="main-row">
     <div class="sidebar">
-      <div class="searchbar">
-        <input
-          class="search-input"
-          type="text"
-          placeholder="Search"
-          name="search"
-        />
-        <button type="submit" class="search-btn">
-          <img src="/search-glass.png" width="20" />
-        </button>
-      </div>
-      <div class="icons-container">
-        <img class="icon" src="/cog.png" alt="" @click="map.getMarkers(0)" />
-        <img class="icon" src="/spray.png" alt="" @click="map.getMarkers(1)" />
-        <img class="icon" src="/tire.png" alt="" />
+      <div class="sidebar-top">
+        <div class="searchbar">
+          <input
+            class="search-input"
+            type="text"
+            placeholder="Search"
+            name="search"
+          />
+          <button type="submit" class="search-btn">
+            <img src="/search-glass.png" width="20" />
+          </button>
+        </div>
+        <div class="icons-container">
+          <img class="icon" src="/cog.png" alt="" @click="map.getMarkers(0)" />
+          <img
+            class="icon"
+            src="/spray.png"
+            alt=""
+            @click="map.getMarkers(1)"
+          />
+          <img class="icon" src="/tire.png" alt="" />
+        </div>
       </div>
       <hr />
-      <Sort
-        @selSort="servi.sortItems($event.prop, $event.asc)"
-        :callback="'$refs.servi.sortItems'"
-      />
-      <div class="info-list">
-        <ServiceItem ref="servi" />
+      <div class="info-container">
+        <Sort
+          @selSort="servi.sortItems($event.prop, $event.asc)"
+          :callback="'$refs.servi.sortItems'"
+        />
+        <div class="info-list">
+          <ServiceItem ref="servi" />
+        </div>
       </div>
+      <hr />
       <Booking />
     </div>
-    <main class="main-container">
+    <div class="main-container">
       <Map ref="map" />
-    </main>
+    </div>
   </div>
 </template>
 
@@ -51,18 +61,23 @@ const servi = ref()
 }
 
 .main-container {
-  flex: 1;
+  flex: 3 0;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  flex-basis: var(--sidebar-width);
+  flex: 0 1 400px;
+  max-height: 100vh;
   margin: 0;
   padding: 1rem;
   background-color: var(--dark-primary);
 }
-
+.sidebar-top {
+  flex: 0 1 100px;
+  display: flex;
+  flex-direction: column;
+}
 .searchbar {
   padding: 1rem;
   display: flex;
@@ -94,14 +109,22 @@ const servi = ref()
 
 hr {
   min-width: 100%;
+  margin-block: 3px;
+}
+
+.info-container {
+  flex: 0 1 500px;
+  display: flex;
+  flex-direction: column;
+  margin-block: 1rem;
 }
 
 .info-list {
-  max-height: 500px;
-  padding: 10px 10px 10px 0px;
+  flex: 0 1 500px;
+  padding-right: 1rem;
   overflow-y: scroll;
-  border-top: 1px solid #7d7048;
-  border-bottom: 1px solid #7d7048;
+  /* border-top: 1px solid #7d7048;
+  border-bottom: 1px solid #7d7048; */
 }
 
 ::-webkit-scrollbar {
@@ -123,29 +146,19 @@ hr {
   background: #7d7048;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 800px) {
   .main-row {
     flex-direction: column-reverse;
   }
 
   .main-container {
-    flex: 5;
-  }
-
-  .map {
-    min-height: 100%;
+    min-height: 67vh;
   }
 
   .sidebar {
-    flex: 1;
+    min-height: 33vh;
     border-radius: 15px 15px 0 0;
-  }
-}
-
-@media screen and (max-width: 330px) {
-  .icons-container img {
-    margin-inline: 5px;
-    width: 55px;
+    overflow-y: scroll;
   }
 }
 </style>

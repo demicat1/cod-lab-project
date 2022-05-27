@@ -7,9 +7,11 @@
       </div>
     </div>
   </div> -->
-  <select name="day-select">
-    <option value="" v-for="item in items">{{item}}</option>
-  </select>
+  <div class="day-select">
+    <select name="day-select">
+      <option value="" v-for="item in items">{{ item }}</option>
+    </select>
+  </div>
 </template>
 
 <script lang="ts">
@@ -25,8 +27,8 @@ export default {
 </script>
 
 <style scoped>
-.day-select{
-  display: none;
+select .day-select {
+  max-width: fit-content;
 }
 
 .day-btn {
