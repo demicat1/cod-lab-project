@@ -3,32 +3,7 @@
     <li>Name: {{ itm.name }}</li>
     <li>Address: {{ itm.address }}</li>
     <li>Rating: 0</li>
-  </button>
-  <button class="info-container">
-    <li>Name: Lorem 1</li>
-    <li>Adress: Ipsum 1</li>
-    <li>Rating: 0</li>
-  </button>
-  <button class="info-container">
-    <li>Name: Lorem 2</li>
-    <li>Adress: Ipsum 2</li>
-    <li>Rating: 0</li>
-  </button>
-  <button class="info-container">
-    <li>Name: Lorem 3</li>
-    <li>Adress: Ipsum 3</li>
-    <li>Rating: 0</li>
-  </button>
-  <button class="info-container">
-    <li>Name: Lorem 4</li>
-    <li>Adress: Ipsum 4</li>
-    <li>Rating: 0</li>
-  </button>
-  <button class="info-container">
-    <li>Name: Lorem 5</li>
-    <li>Adress: Ipsum 5</li>
-    <li>Rating: 0</li>
-  </button>
+  </button>>
 </template>
 
 <script setup>
