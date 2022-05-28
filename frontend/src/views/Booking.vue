@@ -29,7 +29,12 @@ export default {
         'Saturday',
         'Sunday'
       ],
-      time: []
+      time: [
+        '09:00-11:00',
+        '11:00-13:00',
+        '14:00-16:00',
+        '16:00-18:00'
+      ]
     }
   }
 }
@@ -39,9 +44,7 @@ export default {
 .booking-container {
   display: flex;
   flex-direction: column;
-  flex: 0 0 50px;
-  max-height: 200px;
-  padding: 2rem;
+  min-height: 200px;
 }
 
 .booking-container h1,

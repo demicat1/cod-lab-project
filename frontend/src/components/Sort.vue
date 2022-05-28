@@ -6,42 +6,42 @@
       :items="options"
       @selectItm="
         selectedProp = $event;
-        $emit('selSort', { prop: $event, asc: ascendingOrder });
+        $emit('selSort', { prop: $event, asc: ascendingOrder })
       "
     />
+    <span>in</span>
     <div class="order-container">
-      <span>in</span>
       <button
         class="order-btn"
         @click="
           ascendingOrder = !ascendingOrder;
-          $emit('selSort', { prop: selectedProp, asc: ascendingOrder });
+          $emit('selSort', { prop: selectedProp, asc: ascendingOrder })
         "
       >
-        {{ ascendingOrder ? "Ascending" : "Descending" }}
+        {{ ascendingOrder ? 'Ascending' : 'Descending' }}
       </button>
-      <span>order</span>
     </div>
+    <span>order</span>
   </div>
 </template>
 
 <script lang="ts">
-import SortDropdown from "./SortDropdown.vue";
+import SortDropdown from './SortDropdown.vue'
 
 export default {
-  name: "Sort",
-  emits: ["selSort"],
+  name: 'Sort',
+  emits: ['selSort'],
   components: {
-    SortDropdown,
+    SortDropdown
   },
   data() {
     return {
-      options: ["name", "rating"],
+      options: ['name', 'rating'],
       ascendingOrder: true,
-      selectedProp: "name",
-    };
-  },
-};
+      selectedProp: 'name'
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -49,7 +49,6 @@ export default {
   display: flex;
   align-self: baseline;
   align-items: center;
-  margin-block: 1rem;
 }
 
 .sort-container span {

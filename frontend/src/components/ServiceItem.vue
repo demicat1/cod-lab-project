@@ -1,58 +1,60 @@
 <template>
-  <button class="info-container" v-for="itm in items" :key="itm.name">
+  <button class="info-item" v-for="itm in items" :key="itm.name" @click="$emit('serviceSelected')">
     <li>Name: {{ itm.name }}</li>
     <li>Address: {{ itm.address }}</li>
-    <li>Rating: 0</li>
-  </button>>
+    <li>Rating: {{itm.rating}}</li>
+  </button>
 </template>
 
 <script setup>
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { reactive, ref } from "vue";
+import axios, { AxiosError, AxiosResponse } from 'axios'
+import { reactive, ref } from 'vue'
+defineEmits(['serviceSelected'])
 
-const items = reactive([]);
-
-function sortItems(param = "name", ascending = true) {
+const items = reactive([])
+//  emits: ["serviceSelected"],
+function sortItems(param = 'name', ascending = true) {
   items.sort((a, b) => {
     if (ascending) {
       if (a[param] > b[param]) {
-        return 1;
+        return 1
       }
       if (a[param] < b[param]) {
-        return -1;
+        return -1
       }
     }
     if (!ascending) {
       if (a[param] < b[param]) {
-        return 1;
+        return 1
       }
       if (a[param] > b[param]) {
-        return -1;
+        return -1
       }
     }
-    return 0;
-  });
+    return 0
+  })
 }
 
 function getFacilData(facilType = 0) {
   axios.get(`/carwash/getCoords?type=${facilType}`).then((response) => {
-    let itemsResp = response.data;
+    let itemsResp = response.data
     itemsResp.forEach((i) => {
       let item = {
-        name: i["Name"],
-        address: i["Address"],
-        type: facilType,
-      };
-      items.push(item);
-    });
-    sortItems();
-  });
+        name: i['Name'],
+        address: i['Address'],
+        rating: i['Rating'],
+        type: facilType
+      }
+      items.push(item)
+    })
+    sortItems()
+  })
 }
 
-getFacilData(1);
+getFacilData(1)
 
 const vlay = ref('1')
-defineExpose({ sortItems, vlay });
+defineExpose({ sortItems, vlay })
 </script>
 
 <style scoped>
@@ -69,7 +71,7 @@ defineExpose({ sortItems, vlay });
   font-size: 14px;
 }
 
-.info-container {
+.info-item {
   list-style: none;
   width: 100%;
   background-color: transparent;
@@ -81,11 +83,11 @@ defineExpose({ sortItems, vlay });
   cursor: pointer;
 }
 
-.info-container:hover{
+.info-item:hover {
   background-color: #aba46c;
 }
 
-.info-container li {
+.info-item li {
   font-size: 1.7rem;
 }
 </style>
