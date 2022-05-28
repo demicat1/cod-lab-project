@@ -6,6 +6,7 @@
     <DayDropdown :items="weekdays" />
     <TimeDropdown :items="time" />
     <button class="book-btn">Book</button>
+    <button class="book-btn red">Return</button>
   </div>
 </template>
 
@@ -61,5 +62,9 @@ p {
   cursor: pointer;
   margin: 0.5rem;
   align-self: center  ;
+}
+
+.red{
+  background-color: rgb(241, 106, 101);
 }
 </style>

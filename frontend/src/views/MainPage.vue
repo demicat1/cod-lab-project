@@ -23,9 +23,9 @@
           />
           <img class="icon" src="/tire.png" alt="" />
         </div>
+        <hr />
       </div>
-      <hr />
-      <div class="info-container">
+      <div class="info-container" v-if="!isBooking">
         <Sort
           @selSort="servi.sortItems($event.prop, $event.asc)"
           :callback="'$refs.servi.sortItems'"
@@ -33,8 +33,8 @@
         <div class="info-list">
           <ServiceItem ref="servi" @serviceSelected="isBooking = true" v-if="!isBooking" />
         </div>
+        <hr />
       </div>
-      <hr />
       <Booking v-if="isBooking" />
     </div>
     <div class="main-container">
