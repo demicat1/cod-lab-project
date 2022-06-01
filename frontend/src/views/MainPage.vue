@@ -3,57 +3,82 @@
     <div class="sidebar">
       <div class="sidebar-top">
         <div class="searchbar">
-          <input
-            class="search-input"
-            type="text"
-            placeholder="Search"
-            name="search"
-          />
+          <input class="search-input" type="text" placeholder="Search" name="search" />
           <button type="submit" class="search-btn">
             <img src="/search-glass.png" width="20" />
           </button>
         </div>
         <div class="icons-container">
-          <img class="icon" src="/cog.png" alt="" @click="map.getMarkers(0)" />
-          <img
-            class="icon"
-            src="/spray.png"
-            alt=""
-            @click="map.getMarkers(1)"
-          />
-          <img class="icon" src="/tire.png" alt="" />
+          <img class="icon" src="/cog.png" @click="getServices(0)" />
+          <img class="icon" src="/spray.png" @click="getServices(1)" />
+          <img class="icon" src="/tire.png" @click="getServices(2)" />
         </div>
         <hr />
       </div>
       <div class="info-container" v-if="!isBooking">
-        <Sort
-          @selSort="servi.sortItems($event.prop, $event.asc)"
-          :callback="'$refs.servi.sortItems'"
-        />
+        <Sort @selSort="sortItems($event.prop, $event.asc)" />
         <div class="info-list">
-          <ServiceItem ref="servi" @serviceSelected="isBooking = true" v-if="!isBooking" />
+          <ServiceItem ref="servi" :items="services" @serviceSelected="isBooking = true" v-if="!isBooking" />
         </div>
         <hr />
       </div>
       <Booking v-if="isBooking" />
     </div>
     <div class="main-container">
-      <Map ref="map" />
+      <Map ref="map" :services="markers" />
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import Map from './../components/Map.vue'
-import Sort from './../components/Sort.vue'
-import Booking from './Booking.vue'
-import ServiceItem from './../components/ServiceItem.vue'
+<script setup lang="ts">
+import { ref, shallowRef } from "vue";
+import Map from "./../components/Map.vue";
+import Sort from "./../components/Sort.vue";
+import Booking from "./Booking.vue";
+import ServiceItem from "./../components/ServiceItem.vue";
 
-const map = ref()
-const servi = ref()
-const isBooking = ref(false)
+import axios from "axios";
 
+const services = shallowRef<any[]>([]);
+const markers = shallowRef<any[]>([]);
+let isAscending = true;
+
+function getServices(facilType = 0) {
+  axios.get(`/carwash/getCoords?type=${facilType}&asc=${isAscending}`).then((response) => {
+    services.value = response.data;
+    markers.value = response.data;
+  });
+}
+getServices();
+
+function sortItems(param = "Name", ascending = true) {
+  isAscending = ascending;
+  const arr = [...services.value];
+  arr.sort((a, b) => {
+    if (ascending) {
+      if (a[param] > b[param]) {
+        return 1;
+      }
+      if (a[param] < b[param]) {
+        return -1;
+      }
+    }
+    if (!ascending) {
+      if (a[param] < b[param]) {
+        return 1;
+      }
+      if (a[param] > b[param]) {
+        return -1;
+      }
+    }
+    return 0;
+  });
+  services.value = arr;
+}
+
+const map = ref();
+const servi = ref();
+const isBooking = ref(false);
 </script>
 
 <style scoped>

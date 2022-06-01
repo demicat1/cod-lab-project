@@ -1,60 +1,18 @@
 <template>
-  <button class="info-item" v-for="itm in items" :key="itm.name" @click="$emit('serviceSelected')">
-    <li>Name: {{ itm.name }}</li>
-    <li>Address: {{ itm.address }}</li>
-    <li>Rating: {{itm.rating}}</li>
+  <button class="info-item" v-for="itm in props.items" :key="itm.name" @click="$emit('serviceSelected')">
+    <li>Name: {{ itm.Name }}</li>
+    <li>Address: {{ itm.Address }}</li>
+    <li>Rating: {{ itm.Rating }}</li>
   </button>
 </template>
 
-<script setup>
-import axios, { AxiosError, AxiosResponse } from 'axios'
-import { reactive, ref } from 'vue'
-defineEmits(['serviceSelected'])
+<script setup lang="ts">
+import { PropType } from "vue";
 
-const items = reactive([])
-//  emits: ["serviceSelected"],
-function sortItems(param = 'name', ascending = true) {
-  items.sort((a, b) => {
-    if (ascending) {
-      if (a[param] > b[param]) {
-        return 1
-      }
-      if (a[param] < b[param]) {
-        return -1
-      }
-    }
-    if (!ascending) {
-      if (a[param] < b[param]) {
-        return 1
-      }
-      if (a[param] > b[param]) {
-        return -1
-      }
-    }
-    return 0
-  })
-}
-
-function getFacilData(facilType = 0) {
-  axios.get(`/carwash/getCoords?type=${facilType}`).then((response) => {
-    let itemsResp = response.data
-    itemsResp.forEach((i) => {
-      let item = {
-        name: i['Name'],
-        address: i['Address'],
-        rating: i['Rating'],
-        type: facilType
-      }
-      items.push(item)
-    })
-    sortItems()
-  })
-}
-
-getFacilData(1)
-
-const vlay = ref('1')
-defineExpose({ sortItems, vlay })
+defineEmits(["serviceSelected"]);
+const props = defineProps({
+  items: { type: Array as PropType<any[]>, default: [] },
+});
 </script>
 
 <style scoped>

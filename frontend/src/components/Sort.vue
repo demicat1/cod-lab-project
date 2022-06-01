@@ -36,9 +36,9 @@ export default {
   },
   data() {
     return {
-      options: ['name', 'rating'],
+      options: ['Name', 'Rating'],
       ascendingOrder: true,
-      selectedProp: 'name'
+      selectedProp: 'Name'
     }
   }
 }
