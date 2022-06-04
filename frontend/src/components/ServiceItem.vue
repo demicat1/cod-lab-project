@@ -16,24 +16,11 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.short-info {
-  list-style: none;
-  border: 2px solid #66583859;
-  border-radius: 7px;
-  padding: 5px;
-  margin-block: 10px;
-  text-align: left;
-}
-
-.short-info li {
-  font-size: 14px;
-}
-
 .info-item {
   list-style: none;
   width: 100%;
   background-color: transparent;
-  border: 2px solid #66583859;
+  border: 2px solid var(--primary);
   border-radius: 7px;
   padding: 5px;
   margin: 0.5rem 0 0.5rem 0;
@@ -42,7 +29,7 @@ const props = defineProps({
 }
 
 .info-item:hover {
-  background-color: #aba46c;
+  background-color: vaR(--primary);
 }
 
 .info-item li {

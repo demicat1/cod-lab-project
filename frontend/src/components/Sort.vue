@@ -64,11 +64,15 @@ export default {
 }
 
 .order-btn {
-  background-color: #9b8b59;
+  background-color: var(--primary);
   border: 0;
   padding: 0.5rem;
   padding-inline: 2rem;
   border-radius: 5rem;
   cursor: pointer;
+}
+
+.order-btn:hover {
+  background-color: var(--secondary);
 }
 </style>

@@ -3,7 +3,12 @@
     <div class="sidebar">
       <div class="sidebar-top">
         <div class="searchbar">
-          <input class="search-input" type="text" placeholder="Search" name="search" />
+          <input
+            class="search-input"
+            type="text"
+            placeholder="Search"
+            name="search"
+          />
           <button type="submit" class="search-btn">
             <img src="/search-glass.png" width="20" />
           </button>
@@ -18,7 +23,12 @@
       <div class="info-container" v-if="!isBooking">
         <Sort @selSort="sortItems($event.prop, $event.asc)" />
         <div class="info-list">
-          <ServiceItem ref="servi" :items="services" @serviceSelected="isBooking = true" v-if="!isBooking" />
+          <ServiceItem
+            ref="servi"
+            :items="services"
+            @serviceSelected="isBooking = true"
+            v-if="!isBooking"
+          />
         </div>
         <hr />
       </div>
@@ -31,54 +41,56 @@
 </template>
 
 <script setup lang="ts">
-import { ref, shallowRef } from "vue";
-import Map from "./../components/Map.vue";
-import Sort from "./../components/Sort.vue";
-import Booking from "./Booking.vue";
-import ServiceItem from "./../components/ServiceItem.vue";
+import { ref, shallowRef } from 'vue'
+import Map from './../components/Map.vue'
+import Sort from './../components/Sort.vue'
+import Booking from './Booking.vue'
+import ServiceItem from './../components/ServiceItem.vue'
 
-import axios from "axios";
+import axios from 'axios'
 
-const services = shallowRef<any[]>([]);
-const markers = shallowRef<any[]>([]);
-let isAscending = true;
+const services = shallowRef<any[]>([])
+const markers = shallowRef<any[]>([])
+let isAscending = true
 
 function getServices(facilType = 0) {
-  axios.get(`/carwash/getCoords?type=${facilType}&asc=${isAscending}`).then((response) => {
-    services.value = response.data;
-    markers.value = response.data;
-  });
+  axios
+    .get(`/carwash/getCoords?type=${facilType}&asc=${isAscending}`)
+    .then((response) => {
+      services.value = response.data
+      markers.value = response.data
+    })
 }
-getServices();
+getServices()
 
-function sortItems(param = "Name", ascending = true) {
-  isAscending = ascending;
-  const arr = [...services.value];
+function sortItems(param = 'Name', ascending = true) {
+  isAscending = ascending
+  const arr = [...services.value]
   arr.sort((a, b) => {
     if (ascending) {
       if (a[param] > b[param]) {
-        return 1;
+        return 1
       }
       if (a[param] < b[param]) {
-        return -1;
+        return -1
       }
     }
     if (!ascending) {
       if (a[param] < b[param]) {
-        return 1;
+        return 1
       }
       if (a[param] > b[param]) {
-        return -1;
+        return -1
       }
     }
-    return 0;
-  });
-  services.value = arr;
+    return 0
+  })
+  services.value = arr
 }
 
-const map = ref();
-const servi = ref();
-const isBooking = ref(false);
+const map = ref()
+const servi = ref()
+const isBooking = ref(false)
 </script>
 
 <style scoped>
@@ -98,7 +110,7 @@ const isBooking = ref(false);
   max-height: 100vh;
   margin: 0;
   padding: 1rem;
-  background-color: var(--dark-primary);
+  background-color: var(--bg);
   overflow-y: auto;
 }
 .sidebar-top {
@@ -138,7 +150,7 @@ const isBooking = ref(false);
 hr {
   min-width: 100%;
   margin-block: 3px;
-  background-color: #9b8b59;
+  background-color: var(--primary);
   border: none;
   height: 1px;
 }
@@ -165,16 +177,16 @@ hr {
 /* Track */
 ::-webkit-scrollbar-track {
   border-radius: 10px;
-  background-color: #aba46c;
+  background-color: var(--primary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #9b8b59;
+  background: var(--secondary);
   border-radius: 7px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #7d7048;
+  background: var(--secondary-dark);
 }
 
 @media screen and (max-width: 800px) {

@@ -24,7 +24,7 @@ export default {
 
 <style scoped>
 .sort-btn {
-  background-color: #9b8b59;
+  background-color: var(--primary);
   border: 0;
   padding: 0.5rem;
   padding-inline: 2rem;
@@ -33,7 +33,7 @@ export default {
 }
 
 .sort-btn:hover {
-  background-color: #7d7048;
+  background-color: var(--secondary);
 }
 
 .drop-list {
@@ -41,13 +41,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  background-color: #9b8b59;
+  background-color: var(--primary);
   border: solid 1px #000;
   padding: 0.5rem;
   border-radius: 2rem;
 }
 .drop-item button {
-  background-color: #9b8b59;
+  background-color: var(--primary);
   border: 0;
   padding: 0.5rem;
   padding-inline: 3rem;
@@ -55,7 +55,7 @@ export default {
 }
 
 .drop-item button:hover {
-  background-color: #7d7048;
+  background-color: var(--secondary);
   cursor: pointer;
 }
 </style>

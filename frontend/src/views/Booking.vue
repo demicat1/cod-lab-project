@@ -6,7 +6,7 @@
     <DayDropdown :items="weekdays" />
     <TimeDropdown :items="time" />
     <button class="book-btn">Book</button>
-    <button class="book-btn red">Return</button>
+    <button class="book-btn orange">Return</button>
   </div>
 </template>
 
@@ -30,12 +30,7 @@ export default {
         'Saturday',
         'Sunday'
       ],
-      time: [
-        '09:00-11:00',
-        '11:00-13:00',
-        '14:00-16:00',
-        '16:00-18:00'
-      ]
+      time: ['09:00-11:00', '11:00-13:00', '14:00-16:00', '16:00-18:00']
     }
   }
 }
@@ -53,18 +48,25 @@ p {
   margin: 0.5rem;
 }
 
-.book-btn{
-  background-color:#6CABB3;
+.book-btn {
+  background-color: var(--accent);
   border: 0;
   padding: 0.5rem;
   padding-inline: 2rem;
   border-radius: 5rem;
   cursor: pointer;
   margin: 0.5rem;
-  align-self: center  ;
+  align-self: center;
+}
+.book-btn:hover {
+  background-color: var(--accent-dark);
 }
 
-.red{
-  background-color: rgb(241, 106, 101);
+.orange {
+  background-color: var(--secondary);
+}
+
+.orange:hover {
+  background-color: var(--secondary-dark);
 }
 </style>
