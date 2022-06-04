@@ -106,13 +106,12 @@ body {
   border-style: none;
   /* width: 300px; */
   /* height: 50px; */
-  background-color: #ffffff;
+  background-color: var(--bg);
 }
 
 ::placeholder {
   opacity: 75%;
   font-weight: 500;
-  color: var(--dark-primary);
 }
 
 .login-btn {
@@ -120,7 +119,7 @@ body {
   padding: 15px 30px;
   border-radius: 20px;
   border-style: none;
-  background-color: var(--darker-primary);
+  background-color: var(--secondary);
   color: #e5e5e5;
   transition: 0.5s;
   cursor: pointer;
@@ -128,13 +127,13 @@ body {
 }
 
 .login-btn:hover {
-  box-shadow: 0px 5px var(--shadow);
+  background-color: var(--secondary-dark);
 }
 
 .login-link {
   margin: 10px;
   font-weight: 400;
-  color: #000000;
+  color: #000;
   cursor: pointer;
 }
 

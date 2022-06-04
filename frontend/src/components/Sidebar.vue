@@ -34,19 +34,18 @@ const isOpened = ref(false)
   width: 150px;
   height: 100vh;
   z-index: 10;
-  background-color: #d4cd87;
+  background-color: var(--bg);
   transition: width 0.2s linear;
 }
 .sidebar > p {
   /* padding: 0.3rem 0.2rem 0.3rem 1rem; */
   padding: 0.3rem;
   cursor: pointer;
-  background-color: #b9b37a;
-  color: #e5e5e5;
   /* text-align: left; */
+  transition: 0.3s;
 }
 .sidebar > p:hover {
-  background-color: #504c2f;
+  background-color: var(--primary);
 }
 .close-ico {
   position: absolute;
@@ -67,7 +66,7 @@ const isOpened = ref(false)
   right: 25px;
   top: 25px;
   cursor: pointer;
-  background-color: #afa970;
+  background-color: var(--primary);
   padding: 10px;
   border-radius: 15%;
 }

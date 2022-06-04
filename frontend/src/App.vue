@@ -21,9 +21,6 @@ import Sidebar from './components/Sidebar.vue'
   --secondary-dark: #c48360;
   --accent: #90aacb;
   --accent-dark: #6683a8;
-  --darker-primary: #87814e;
-  --shadow: #504c2f;
-  --bg-primary: #c4c4c4;
   --sidebar-width: 400px;
 }
 * {
