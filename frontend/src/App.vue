@@ -44,4 +44,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+button{
+  transition: 0.3s;
+}
 </style>

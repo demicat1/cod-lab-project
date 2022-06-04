@@ -42,7 +42,7 @@ export default {
   flex-direction: column;
   align-items: baseline;
   background-color: var(--primary);
-  border: solid 1px #000;
+  border: solid 1px var(--secondary);
   padding: 0.5rem;
   border-radius: 2rem;
 }

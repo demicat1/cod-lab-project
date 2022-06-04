@@ -10,7 +10,7 @@
             name="search"
           />
           <button type="submit" class="search-btn">
-            <img src="/search-glass.png" width="20" />
+            <img src="/search-glass.png" class="glass-icon" />
           </button>
         </div>
         <div class="icons-container">
@@ -112,6 +112,7 @@ const isBooking = ref(false)
   padding: 1rem;
   background-color: var(--bg);
   overflow-y: auto;
+  border: solid 1px var(--primary);
 }
 .sidebar-top {
   flex: 0 1 100px;
@@ -119,22 +120,50 @@ const isBooking = ref(false)
   flex-direction: column;
 }
 .searchbar {
-  padding: 1rem;
-  display: flex;
-  gap: 1rem;
+  position: relative;
 }
 .search-input {
-  padding: 0.5rem;
   border: 0;
-  flex-grow: 1;
-  font-size: 18px;
-  border-radius: 5px 0 0 5px;
+  /* font-size: 18px; */
+  width: 100%;
+  height: 100%;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  background-color: var(--primary);
+  outline: none;
+  transition: 0.3s;
 }
+
+.search-input:focus{
+  background-color: var(--secondary);
+  transition: 0.3s;
+}
+
+.search-input:focus::placeholder{
+  transition: 0.3s;
+  color: transparent;
+}
+
 .search-btn {
-  padding: 0.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  width: 4rem;
+  height: 100%;
+  z-index: 1;
   border: 0;
-  border-radius: 0 5px 5px 0;
+  border-radius: 50px;
   cursor: pointer;
+  background-color: var(--secondary);
+}
+
+.search-btn:hover {
+  background-color: var(--secondary-dark);
+}
+
+.glass-icon {
+  max-width: 2rem;
 }
 .icons-container {
   display: flex;
@@ -145,6 +174,12 @@ const isBooking = ref(false)
   max-width: 6rem;
   max-height: 6rem;
   cursor: pointer;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.icon:hover{
+  box-shadow: 0 0 5px 1px #000;
 }
 
 hr {
