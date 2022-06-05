@@ -7,8 +7,8 @@
       </div>
     </div>
   </div> -->
-  <div class="day-select">
-    <select name="day-select">
+  <div class="day-select-container">
+    <select name="day-select" class="day-select">
       <option value="" v-for="item in items">{{ item }}</option>
     </select>
   </div>
@@ -27,8 +27,17 @@ export default {
 </script>
 
 <style scoped>
-select .day-select {
-  max-width: fit-content;
+.day-select {
+  /* max-width: fit-content; */
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border-radius: 1rem;
+  background-color: var(--primary);
+  transition: 0.3s;
+}
+
+.day-select:hover{
+  background-color: var(--secondary);
 }
 
 .day-btn {
