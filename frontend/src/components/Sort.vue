@@ -48,12 +48,12 @@ export default {
 .sort-container {
   display: flex;
   align-self: baseline;
+  min-width: 100%;
+  justify-content: space-evenly;
   align-items: center;
 }
 
 .sort-container span {
-  text-align: center;
-  padding-inline: 0.5rem;
   font-size: 1.3rem !important;
   font-weight: bold;
 }
@@ -67,7 +67,7 @@ export default {
   background-color: var(--primary);
   border: 0;
   padding: 0.5rem;
-  padding-inline: 2rem;
+  padding-inline: 1.5rem;
   border-radius: 5rem;
   cursor: pointer;
 }

@@ -23,11 +23,15 @@ export default {
 </script>
 
 <style scoped>
+.sort-dropdown {
+  position: relative;
+}
+
 .sort-btn {
   background-color: var(--primary);
   border: 0;
   padding: 0.5rem;
-  padding-inline: 2rem;
+  padding-inline: 1.5rem;
   border-radius: 5rem;
   cursor: pointer;
 }
@@ -40,17 +44,25 @@ export default {
   position: absolute;
   display: flex;
   flex-direction: column;
-  align-items: baseline;
+  align-items: center;
   background-color: var(--primary);
   border: solid 1px var(--secondary);
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   border-radius: 2rem;
+  left: 50%;
+  transform: translate(-50%);
 }
+
+.drop-item{
+  width: 100%;
+}
+
 .drop-item button {
   background-color: var(--primary);
+  width: 100%;
   border: 0;
   padding: 0.5rem;
-  padding-inline: 3rem;
+  padding-inline: 1.5rem;
   border-radius: 2rem;
 }
 
