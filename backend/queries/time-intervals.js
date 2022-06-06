@@ -47,17 +47,9 @@ function formatTime(hourMark) {
     string = hourMark.toString() + minute
   }
   else {
-    switch (hourMark % Math.floor(hourMark)) {
-      case 0.5:
-        minute = ':30'
-        break
-      case 0.25:
-        minute = ':15'
-        break
-      case 0.75:
-        minute = ':45'
-        break
-    }
+    minute = hourMark % Math.floor(hourMark)
+    minute *= 60
+    minute = ":" + Math.round(minute).toString()
     string = Math.floor(hourMark).toString() + minute
   }
 
