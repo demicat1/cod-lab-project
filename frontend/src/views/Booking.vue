@@ -40,7 +40,7 @@ export default {
 .booking-container {
   display: flex;
   flex-direction: column;
-  min-height: 200px;
+  min-height: 400px;
 }
 
 .booking-container h1,

@@ -23,8 +23,6 @@
 import { ref } from '@vue/reactivity'
 
 const isOpened = ref(false)
-
-//TODO Reactive color code variables?
 </script>
 
 <style scoped>
