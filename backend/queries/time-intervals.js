@@ -17,7 +17,13 @@ function timeToNumber(time) {
   return hourMark
 }
 
-function generateIntervals(array, start, end) {
+function getIntervals(start, end, bookedTimes = []) {
+  console.log(intervals, start, end, bookedTimes)
+  //return generateIntervals(intervals, start, end, bookedTimes);
+}
+
+// TODO exclude from array time slots containing in bookedTimes
+function generateIntervals(array, start, end, bookedTimes = []) {
   interval = []
   interval.push(start)
   interval.push((start += 0.5))
@@ -58,4 +64,8 @@ function formatTime(hourMark) {
   }
 
   return string
+}
+
+module.exports = {
+  getIntervals
 }

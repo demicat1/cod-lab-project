@@ -7,6 +7,6 @@ router.route('/getList').get(carwash.getAll)
 router.route('/createOrder').get(carwash.createOrder)
 router.route('/getCoords').get(mapping.getCoords)
 router.route('/search').get(carwash.search)
-// TODO Extract carwash id from jwt
+router.route('/getTimeSlots').get(carwash.getTimeSlots)
 
 module.exports = router

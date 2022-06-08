@@ -1,6 +1,7 @@
 var db = require("./data-source");
 const wooppay = require("../services/payment-service");
 const genGuid = require("../helpers/helpers").generateGuid;
+const genTimeSlots = require("./time-intervals").getIntervals;
 
 function getAllCarWashes(req, res, next) {
   db.any(`SELECT * FROM "CarWashes"`)
@@ -23,6 +24,32 @@ function search(req, res, next) {
       res.status(200).json({
         status: "success",
         data: data,
+      });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+async function getTimeSlots(req, res, next) {
+  db.any(`SELECT "BookedDate" FROM "Orders" WHERE "FacilityId" = '${req.query.id}' AND "BookedDate"::date = '${req.query.date}'`)
+    .then(async (data) => {
+      const dates = await db.one(
+        `SELECT "WorkdayStartHours", "WorkdayEndHours" FROM "Facilities" WHERE "Id" = '${req.query.id}'`
+      );
+
+      const slots = genTimeSlots(
+        (start = dates.WorkdayStartHours),
+        (end = dates.WorkdayEndHours),
+        (bookedTimes = data.map((x) => {
+          const date = new Date(x.BookedDate);
+          return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000).toLocaleString();
+        }))
+      );
+
+      res.status(200).json({
+        status: "success",
+        data: slots,
       });
     })
     .catch(function (err) {
@@ -80,4 +107,5 @@ module.exports = {
   getAll: getAllCarWashes,
   createOrder,
   search,
+  getTimeSlots,
 };
