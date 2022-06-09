@@ -32,6 +32,7 @@ export default {
   padding: 0.5rem 1rem;
   margin: 0.5rem;
   border-radius: 1rem;
+  border: 1px solid #000;
   background-color: var(--primary);
   transition: 0.3s;
 }

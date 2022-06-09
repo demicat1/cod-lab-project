@@ -3,7 +3,7 @@
     <h1 class="title">Title</h1>
     <p class="rating">Rating</p>
     <p class="adress">Adress</p>
-    <Calendar />
+    <input type="date" id="date" class="date" />
     <TimeDropdown :items="time" />
     <button class="book-btn">Book</button>
     <button class="book-btn accent">Return</button>
@@ -12,12 +12,10 @@
 
 <script lang="ts">
 import TimeDropdown from './../components/TimeDropdown.vue'
-import Calendar from './../components/Calendar.vue'
 
 export default {
   components: {
-    TimeDropdown,
-    Calendar
+    TimeDropdown
   },
   data() {
     return {
@@ -47,9 +45,20 @@ button {
   min-height: 400px;
 }
 
-.booking-container h1,
-p {
+.booking-container > * {
   margin: 0.5rem;
+}
+.date {
+  background-color: var(--primary);
+  border: 1px solid #000;
+  border-radius: 0.5em;
+  padding: 0.3em 1em;
+  align-self: center;
+  transition: 0.3s;
+}
+
+.date:hover {
+  background-color: var(--secondary);
 }
 
 .book-btn {
