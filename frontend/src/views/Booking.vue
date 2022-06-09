@@ -3,21 +3,21 @@
     <h1 class="title">Title</h1>
     <p class="rating">Rating</p>
     <p class="adress">Adress</p>
-    <DayDropdown :items="weekdays" />
+    <Calendar />
     <TimeDropdown :items="time" />
     <button class="book-btn">Book</button>
-    <button class="book-btn orange">Return</button>
+    <button class="book-btn accent">Return</button>
   </div>
 </template>
 
 <script lang="ts">
-import DayDropdown from './../components/DayDropdown.vue'
 import TimeDropdown from './../components/TimeDropdown.vue'
+import Calendar from './../components/Calendar.vue'
 
 export default {
   components: {
-    DayDropdown,
-    TimeDropdown
+    TimeDropdown,
+    Calendar
   },
   data() {
     return {
@@ -37,6 +37,10 @@ export default {
 </script>
 
 <style scoped>
+button {
+  border: 1px solid #000;
+}
+
 .booking-container {
   display: flex;
   flex-direction: column;
@@ -49,8 +53,7 @@ p {
 }
 
 .book-btn {
-  background-color: var(--accent);
-  border: 0;
+  background-color: var(--secondary);
   padding: 0.5rem;
   padding-inline: 2rem;
   border-radius: 5rem;
@@ -59,14 +62,14 @@ p {
   align-self: center;
 }
 .book-btn:hover {
-  background-color: var(--accent-dark);
-}
-
-.orange {
-  background-color: var(--secondary);
-}
-
-.orange:hover {
   background-color: var(--secondary-dark);
+}
+
+.accent {
+  background-color: var(--accent);
+}
+
+.accent:hover {
+  background-color: var(--accent-dark);
 }
 </style>
