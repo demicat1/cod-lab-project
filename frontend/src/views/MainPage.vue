@@ -2,14 +2,15 @@
   <div class="main-row">
     <div class="sidebar">
       <div class="sidebar-top">
-        <div class="searchbar">
+           <div class="searchbar">
           <input
             class="search-input"
             type="text"
             placeholder="Search"
             name="search"
+            v-model = srchMod.search
           />
-          <button type="submit" class="search-btn">
+          <button type="submit" class="search-btn" @click="Search()">
             <img src="/search-glass.png" class="glass-icon" />
           </button>
         </div>
@@ -46,12 +47,27 @@ import Map from './../components/Map.vue'
 import Sort from './../components/Sort.vue'
 import Booking from './Booking.vue'
 import ServiceItem from './../components/ServiceItem.vue'
+// import Search from '../../..//backend/queries/car-wash-queries'
+
+
 
 import axios from 'axios'
 
 const services = shallowRef<any[]>([])
 const markers = shallowRef<any[]>([])
+const srchMod = ref({search:""})
 let isAscending = true
+
+function Search (Search = srchMod.value.search){
+  console.log(Search)
+  axios
+    .get(`/carwash/search?q=${Search}`)
+    .then((response) => {
+      console.log(response.data.data)
+      services.value = response.data.data
+      markers.value = response.data.data
+    })
+}
 
 function getServices(facilType = 0) {
   axios
