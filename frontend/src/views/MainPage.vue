@@ -31,7 +31,7 @@
         <hr />
       </div>
       <Suspense>
-        <Booking :service="selectedService" v-if="isBooking" />
+        <Booking :service="selectedService" @return="isBooking = false" v-if="isBooking" />
       </Suspense>
     </div>
     <div class="main-container">

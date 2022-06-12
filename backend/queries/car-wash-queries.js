@@ -47,7 +47,11 @@ async function createOrder(req, res, next) {
   let userPhone = "";
   let servicePrice = 0;
 
-  await db
+  const tempDate = new Date(req.body.date);
+  const bookDate = new Date(tempDate - tempDate.getTimezoneOffset() * 60 * 1000)
+  console.log(bookDate.toLocaleString())
+  res.send("test")
+ /*  await db
     .query(
       `INSERT INTO "Orders"
     ("Id", "UserId", "FacilityId", "BoxNumber", "CustomerName", 
@@ -81,7 +85,7 @@ async function createOrder(req, res, next) {
     });
 
   await wooppay.initSession();
-  res.send(await wooppay.createInvoice(userPhone, genGuid(), servicePrice));
+  res.send(await wooppay.createInvoice(userPhone, genGuid(), servicePrice)); */
 }
 
 async function verifyPayment(req, res, next) {

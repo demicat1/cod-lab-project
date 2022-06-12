@@ -3,19 +3,41 @@
     <h1 class="title">{{ service.Name }}</h1>
     <p class="rating">{{ service.Address }}</p>
     <p class="adress">Rating: {{ service.Rating }}</p>
-    <input type="date" id="date" class="date" />
-    <TimeDropdown :items="time" />
-    <button class="book-btn">Book</button>
-    <button class="book-btn accent">Return</button>
+    <input type="date" id="date" class="date" v-model="date" />
+    <TimeDropdown :items="times" @selectTime="time = $event.value" />
+    <button class="book-btn" @click="bookTime()">Book</button>
+    <button class="book-btn accent" @click="$emit('return')">Return</button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from "@vue/reactivity";
 import axios from "axios";
 import TimeDropdown from "./../components/TimeDropdown.vue";
 
 const props = defineProps({ service: Object });
-const time = await (await axios.get(`/carwash/getTimeSlots?id=${props.service.Id}&date=${new Date("2022-04-11").toLocaleDateString()}`)).data;
+defineEmits(["return"]);
+
+const date = ref(new Date().toISOString().substring(0, 10));
+const times = await (
+  await axios.get(`/carwash/getTimeSlots?id=${props.service.Id}&date=${new Date("2022-04-11").toLocaleDateString()}`)
+).data;
+const time = ref(times[0]);
+
+function bookTime() {
+  const formedDate = new Date(
+    new Date(date.value).setHours(time.value.substring(0, 2), time.value.substring(3, 5)) +
+      new Date().getTimezoneOffset() * 60 * 1000
+  );
+
+  axios
+    .post("/carwash/createOrder", {
+      date: formedDate,
+    })
+    .then(function (response) {
+      console.log(response);
+    });
+}
 </script>
 
 <style scoped>

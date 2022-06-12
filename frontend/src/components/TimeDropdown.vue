@@ -8,8 +8,8 @@
     </div>
   </div> -->
   <div class="time-select-container">
-    <select name="time-select" class="time-select">
-      <option value="" v-for="item in items">{{ item }}</option>
+    <select name="time-select" class="time-select" @change="$emit('selectTime', $event.target)">
+      <option :value="item.substring(0, 5)" v-for="item in items">{{ item }}</option>
     </select>
   </div>
 </template>
@@ -18,6 +18,7 @@
 export default {
   name: 'TimeDropdown',
   props: ['items'],
+  emits: ['selectTime'],
   data() {
     return {
       isOpen: false
