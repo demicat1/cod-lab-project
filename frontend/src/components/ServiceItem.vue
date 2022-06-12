@@ -1,5 +1,5 @@
 <template>
-  <button class="info-item" v-for="itm in props.items" :key="itm.name" @click="$emit('serviceSelected')">
+  <button class="info-item" v-for="itm in props.items" :key="itm.name" @click="$emit('serviceSelected', itm)">
     <li>Name: {{ itm.Name }}</li>
     <li>Address: {{ itm.Address }}</li>
     <li>Rating: {{ itm.Rating }}</li>

@@ -1,8 +1,8 @@
 <template>
   <div class="booking-container">
-    <h1 class="title">Title</h1>
-    <p class="rating">Rating</p>
-    <p class="adress">Adress</p>
+    <h1 class="title">{{ service.Name }}</h1>
+    <p class="rating">{{ service.Address }}</p>
+    <p class="adress">Rating: {{ service.Rating }}</p>
     <DayDropdown :items="weekdays" />
     <TimeDropdown :items="time" />
     <button class="book-btn">Book</button>
@@ -10,30 +10,14 @@
   </div>
 </template>
 
-<script lang="ts">
-import DayDropdown from './../components/DayDropdown.vue'
-import TimeDropdown from './../components/TimeDropdown.vue'
+<script setup lang="ts">
+import axios from "axios";
+import DayDropdown from "./../components/DayDropdown.vue";
+import TimeDropdown from "./../components/TimeDropdown.vue";
 
-export default {
-  components: {
-    DayDropdown,
-    TimeDropdown
-  },
-  data() {
-    return {
-      weekdays: [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-      ],
-      time: ['09:00-11:00', '11:00-13:00', '14:00-16:00', '16:00-18:00']
-    }
-  }
-}
+const props = defineProps({ service: Object });
+const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const time = await (await axios.get(`/carwash/getTimeSlots?id=${props.service.Id}&date=${new Date("2022-04-11").toLocaleDateString()}`)).data;
 </script>
 
 <style scoped>

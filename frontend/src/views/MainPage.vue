@@ -3,12 +3,7 @@
     <div class="sidebar">
       <div class="sidebar-top">
         <div class="searchbar">
-          <input
-            class="search-input"
-            type="text"
-            placeholder="Search"
-            name="search"
-          />
+          <input class="search-input" type="text" placeholder="Search" name="search" />
           <button type="submit" class="search-btn">
             <img src="/search-glass.png" class="glass-icon" />
           </button>
@@ -26,13 +21,18 @@
           <ServiceItem
             ref="servi"
             :items="services"
-            @serviceSelected="isBooking = true"
+            @serviceSelected="
+              isBooking = true;
+              selectedService = $event;
+            "
             v-if="!isBooking"
           />
         </div>
         <hr />
       </div>
-      <Booking v-if="isBooking" />
+      <Suspense>
+        <Booking :service="selectedService" v-if="isBooking" />
+      </Suspense>
     </div>
     <div class="main-container">
       <Map ref="map" :services="markers" />
@@ -41,56 +41,55 @@
 </template>
 
 <script setup lang="ts">
-import { ref, shallowRef } from 'vue'
-import Map from './../components/Map.vue'
-import Sort from './../components/Sort.vue'
-import Booking from './Booking.vue'
-import ServiceItem from './../components/ServiceItem.vue'
+import { ref, shallowRef } from "vue";
+import Map from "./../components/Map.vue";
+import Sort from "./../components/Sort.vue";
+import Booking from "./Booking.vue";
+import ServiceItem from "./../components/ServiceItem.vue";
 
-import axios from 'axios'
+import axios from "axios";
 
-const services = shallowRef<any[]>([])
-const markers = shallowRef<any[]>([])
-let isAscending = true
+const services = shallowRef<any[]>([]);
+const markers = shallowRef<any[]>([]);
+const selectedService = ref(null);
+let isAscending = true;
 
 function getServices(facilType = 0) {
-  axios
-    .get(`/carwash/getCoords?type=${facilType}&asc=${isAscending}`)
-    .then((response) => {
-      services.value = response.data
-      markers.value = response.data
-    })
+  axios.get(`/carwash/getCoords?type=${facilType}&asc=${isAscending}`).then((response) => {
+    services.value = response.data;
+    markers.value = response.data;
+  });
 }
-getServices()
+getServices();
 
-function sortItems(param = 'Name', ascending = true) {
-  isAscending = ascending
-  const arr = [...services.value]
+function sortItems(param = "Name", ascending = true) {
+  isAscending = ascending;
+  const arr = [...services.value];
   arr.sort((a, b) => {
     if (ascending) {
       if (a[param] > b[param]) {
-        return 1
+        return 1;
       }
       if (a[param] < b[param]) {
-        return -1
+        return -1;
       }
     }
     if (!ascending) {
       if (a[param] < b[param]) {
-        return 1
+        return 1;
       }
       if (a[param] > b[param]) {
-        return -1
+        return -1;
       }
     }
-    return 0
-  })
-  services.value = arr
+    return 0;
+  });
+  services.value = arr;
 }
 
-const map = ref()
-const servi = ref()
-const isBooking = ref(false)
+const map = ref();
+const servi = ref();
+const isBooking = ref(false);
 </script>
 
 <style scoped>
@@ -134,12 +133,12 @@ const isBooking = ref(false)
   transition: 0.3s;
 }
 
-.search-input:focus{
+.search-input:focus {
   background-color: var(--secondary);
   transition: 0.3s;
 }
 
-.search-input:focus::placeholder{
+.search-input:focus::placeholder {
   transition: 0.3s;
   color: transparent;
 }
@@ -178,7 +177,7 @@ const isBooking = ref(false)
   transition: 0.3s;
 }
 
-.icon:hover{
+.icon:hover {
   box-shadow: 0 0 5px 1px #000;
 }
 

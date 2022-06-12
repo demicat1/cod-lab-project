@@ -8,7 +8,7 @@ function getCoords(req, res, next) {
 
   db.any(
     `
-    SELECT "Latitude", "Longitude", "Name", "Address", "Rating", "WorkdayEndHours", "WorkdayStartHours"
+    SELECT "Id", "Latitude", "Longitude", "Name", "Address", "Rating", "WorkdayEndHours", "WorkdayStartHours"
       FROM 
     "Facilities" WHERE "Type" = '${facilType}' ORDER BY "Name" ${order}
     `

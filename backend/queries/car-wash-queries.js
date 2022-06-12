@@ -35,22 +35,19 @@ async function getTimeSlots(req, res, next) {
   db.any(`SELECT "BookedDate" FROM "Orders" WHERE "FacilityId" = '${req.query.id}' AND "BookedDate"::date = '${req.query.date}'`)
     .then(async (data) => {
       const dates = await db.one(
-        `SELECT "WorkdayStartHours", "WorkdayEndHours" FROM "Facilities" WHERE "Id" = '${req.query.id}'`
+        `SELECT "WorkdayStartHours"::text, "WorkdayEndHours"::text FROM "Facilities" WHERE "Id" = '${req.query.id}'`
       );
 
       const slots = genTimeSlots(
-        (start = dates.WorkdayStartHours),
-        (end = dates.WorkdayEndHours),
+        dates.WorkdayStartHours,
+        dates.WorkdayEndHours,
         (bookedTimes = data.map((x) => {
           const date = new Date(x.BookedDate);
-          return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000).toLocaleString();
+          return new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
         }))
       );
 
-      res.status(200).json({
-        status: "success",
-        data: slots,
-      });
+      res.send(slots);
     })
     .catch(function (err) {
       return next(err);
