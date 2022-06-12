@@ -15,7 +15,6 @@ import axios from "axios";
 import TimeDropdown from "./../components/TimeDropdown.vue";
 
 const props = defineProps({ service: Object });
-const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const time = await (await axios.get(`/carwash/getTimeSlots?id=${props.service.Id}&date=${new Date("2022-04-11").toLocaleDateString()}`)).data;
 </script>
 

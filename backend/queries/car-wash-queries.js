@@ -3,29 +3,12 @@ const wooppay = require("../services/payment-service");
 const genGuid = require("../helpers/helpers").generateGuid;
 const genTimeSlots = require("./time-intervals").getIntervals;
 
-function getAllCarWashes(req, res, next) {
-  db.any(`SELECT * FROM "CarWashes"`)
-    .then((data) => {
-      res.status(200).json({
-        status: "success",
-        data: data,
-      });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-}
-
 function search(req, res, next) {
-  const search = req.query.q;
-  console.log('search');
-  console.log(search);
   db.any(
     `SELECT "Latitude", "Longitude", "Name", "Address", "Rating", "WorkdayEndHours", "WorkdayStartHours"
-     FROM "Facilities" WHERE LOWER("Name") LIKE LOWER('%${search}%') OR LOWER("Address") LIKE LOWER('%${search}%')`
+     FROM "Facilities" WHERE LOWER("Name") LIKE LOWER('%${req.query.q}%') OR LOWER("Address") LIKE LOWER('%${req.query.q}%')`
   )
     .then((data) => {
-      console.log(data)
       res.status(200).json({
         status: "success",
         data: data,
@@ -106,7 +89,6 @@ async function verifyPayment(req, res, next) {
 }
 
 module.exports = {
-  getAll: getAllCarWashes,
   createOrder,
   search,
   getTimeSlots,
