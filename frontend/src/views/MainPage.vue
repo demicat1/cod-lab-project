@@ -3,8 +3,14 @@
     <div class="sidebar">
       <div class="sidebar-top">
         <div class="searchbar">
-          <input class="search-input" type="text" placeholder="Search" name="search" />
-          <button type="submit" class="search-btn">
+          <input
+            class="search-input"
+            type="text"
+            placeholder="Search"
+            name="search"
+            v-model = srchMod.search
+          />
+          <button type="submit" class="search-btn" @click="Search()">
             <img src="/search-glass.png" class="glass-icon" />
           </button>
         </div>
@@ -52,7 +58,19 @@ import axios from "axios";
 const services = shallowRef<any[]>([]);
 const markers = shallowRef<any[]>([]);
 const selectedService = ref(null);
+const srchMod = ref({search:""})
 let isAscending = true;
+
+function Search (Search = srchMod.value.search){
+  console.log(Search)
+  axios
+    .get(`/carwash/search?q=${Search}`)
+    .then((response) => {
+      console.log(response.data.data)
+      services.value = response.data.data
+      markers.value = response.data.data
+    })
+}
 
 function getServices(facilType = 0) {
   axios.get(`/carwash/getCoords?type=${facilType}&asc=${isAscending}`).then((response) => {

@@ -17,10 +17,15 @@ function getAllCarWashes(req, res, next) {
 }
 
 function search(req, res, next) {
+  const search = req.query.q;
+  console.log('search');
+  console.log(search);
   db.any(
-    `SELECT * FROM "Facilities" WHERE LOWER("Name") LIKE LOWER('%${req.query.q}%') OR LOWER("Address") LIKE LOWER('%${req.query.q}%')`
+    `SELECT "Latitude", "Longitude", "Name", "Address", "Rating", "WorkdayEndHours", "WorkdayStartHours"
+     FROM "Facilities" WHERE LOWER("Name") LIKE LOWER('%${search}%') OR LOWER("Address") LIKE LOWER('%${search}%')`
   )
     .then((data) => {
+      console.log(data)
       res.status(200).json({
         status: "success",
         data: data,
