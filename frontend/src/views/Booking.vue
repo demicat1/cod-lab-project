@@ -3,6 +3,13 @@
     <h1 class="title">{{ service.Name }}</h1>
     <p class="rating">{{ service.Address }}</p>
     <p class="adress">Rating: {{ service.Rating }}</p>
+    <div class="service-list">
+      <div class="service-item" v-for="serv in servs">
+        <p>{{ serv.Name }}</p>
+        <p>{{ serv.Description }}</p>
+        <p>{{ serv.Price }}</p>
+      </div>
+    </div>
     <input type="date" id="date" class="date" v-model="date" />
     <TimeDropdown :items="times" @selectTime="time = $event.value" />
     <button class="book-btn" @click="bookTime()">Book</button>
@@ -23,6 +30,7 @@ const times = await (
   await axios.get(`/carwash/getTimeSlots?id=${props.service.Id}&date=${new Date("2022-04-11").toLocaleDateString()}`)
 ).data;
 const time = ref(times[0]);
+const servs = ref([])
 
 function bookTime() {
   const formedDate = new Date(
@@ -38,6 +46,16 @@ function bookTime() {
       console.log(response);
     });
 }
+
+async function getServiceList() {
+  axios.get(`/carwash/getServiceInfo?id=${props.service.Id}`).then((response) => {
+    let servInfoResp = response.data
+    servInfoResp.forEach(i => {
+      this.serv.push({Name: i["Name"], Description: i["Description"], Price: i["Price"]})
+    });
+  })
+}
+await getServiceList()
 </script>
 
 <style scoped>
@@ -64,7 +82,7 @@ button {
 }
 
 .date:hover {
-  background-color: var(--secondary);
+  /* background-color: var(--secondary); */
 }
 
 .book-btn {

@@ -211,11 +211,11 @@ hr {
   border-bottom: 1px solid #7d7048; */
 }
 
+/* Track */
 ::-webkit-scrollbar {
   width: 13px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: var(--primary);

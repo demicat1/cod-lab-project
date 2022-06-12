@@ -17,7 +17,7 @@ function generateIntervals(start, end, bookedTimes, array = []) {
     return (x.getHours() + x.getMinutes() / 60 + x.getSeconds() / 3600).toFixed(2)
   })
   hours.forEach((h) => {
-    if (start <= h && (start + 0.5) >= h) {
+    if (start <= h && (start + 0.5) > h) {
       isBooked = true
       return
     }
