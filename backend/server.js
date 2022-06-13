@@ -1,7 +1,7 @@
 const express = require("express");
 var bodyParser = require("body-parser");
 require("dotenv").config();
-//require("./services/payment-service").initSession();
+require("./services/payment-service").initSession();
 
 const app = express();
 const port = 3005;

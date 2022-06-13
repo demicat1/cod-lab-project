@@ -2,7 +2,7 @@ const db = require("./data-source");
 
 function getServiceInfo(req, res, next) {
   db.any(
-    `SELECT "Name", "Description", "Price"
+    `SELECT "Id", "Name", "Description", "Price"
      FROM "Services" WHERE "CarWashId" = '${req.query.id}'`
   )
     .then((data) => {

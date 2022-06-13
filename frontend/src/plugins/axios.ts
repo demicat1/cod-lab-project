@@ -6,7 +6,7 @@ import router from "./router";
 export default axios.create({});
 axios.defaults.baseURL = String(import.meta.env.VITE_API_URL);
 
-axios.defaults.headers.common['Authorization'] = "Bearer " + Store.userJwt;
+axios.defaults.headers.common['Authorization'] = Store.userJwt;
 
 /* axios.interceptors.request.use(function (request) {
     requestInProcess.value = true;

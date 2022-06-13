@@ -5,51 +5,26 @@
     <p class="adress">Rating: {{ service.Rating }}</p>
     <h2>Choose an услугу:</h2>
     <div class="service-list">
-      <div class="service-item">
-        <p><b>Кузов+салон</b></p>
-        <p>Полная мойка авто снаружи с помощью чистящих средств, сушка машины</p>
-        <p class="price">5 000</p>
-      </div>
-      <div class="service-item">
-        <p><b>Lorem, ipsum.</b></p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi?</p>
-        <p class="price">6 000</p>
-      </div>
-      <div class="service-item">
-        <p><b>Lorem.</b></p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, doloribus.</p>
-        <p class="price">7 000</p>
-      </div>
-      <div class="service-item">
-        <p><b>Nostrum?</b></p>
-        <p>Quae exercitationem officiis et qui omnis! Ipsa error aperiam ut!</p>
-        <p class="price">8 000</p>
-      </div>
-      <div class="service-item">
-        <p><b>Earum.</b></p>
-        <p>Ad, sint. At, vero sunt illum corporis amet ea sint.</p>
-        <p class="price">9 000</p>
-      </div>
-      <div class="service-item">
-        <p><b>Distinctio.</b></p>
-        <p>Doloribus quo harum quisquam expedita neque ullam. Fugit, ullam possimus!</p>
-        <p class="price">10 000</p>
-      </div>
-      <div class="service-item">
-        <p><b>Blanditiis!</b></p>
-        <p>Optio, ad incidunt! Dolor nobis quas ipsam at, vero id.</p>
-        <p class="price">11 000</p>
-      </div>
-      <div class="service-item">
-        <p><b>Maiores!</b></p>
-        <p>Non enim ab soluta voluptates, maxime reprehenderit ipsa sint minima?</p>
-        <p class="price">12 000</p>
+      <div
+        class="service-item"
+        :class="{ selected: s.Id == serviceSelectedId }"
+        v-for="s in services"
+        :key="s.Id"
+        @click="serviceSelectedId = s.Id"
+      >
+        <p>
+          <b>{{ s.Name }}</b>
+        </p>
+        <p>{{ s.Description }}</p>
+        <p class="price">{{ s.Price }}</p>
       </div>
     </div>
     <input type="date" id="date" class="date" v-model="date" />
     <TimeDropdown :items="times" @selectTime="time = $event.value" />
-    <button class="book-btn" @click="bookTime()">Book</button>
-    <button class="book-btn accent" @click="$emit('return')">Return</button>
+    <button class="book-btn" :class="{ loading: isProcessing }" :disabled="isProcessing" @click="bookTime()">Book</button>
+    <button class="book-btn accent" :class="{ loading: isProcessing }" :disabled="isProcessing" @click="$emit('return')">
+      Return
+    </button>
   </div>
 </template>
 
@@ -66,9 +41,21 @@ const times = await (
   await axios.get(`/carwash/getTimeSlots?id=${props.service.Id}&date=${new Date("2022-04-11").toLocaleDateString()}`)
 ).data;
 const time = ref(times[0]);
-const servs = ref([])
+const services = ref([]);
+const serviceSelectedId = ref("");
+const isProcessing = ref(false);
+
+async function getServiceList() {
+  axios.get(`/carwash/getServiceInfo?id=${props.service.Id}`).then((response) => {
+    services.value = response.data;
+    serviceSelectedId.value = services.value[0].Id;
+  });
+}
+await getServiceList();
 
 function bookTime() {
+  isProcessing.value = true;
+
   const formedDate = new Date(
     new Date(date.value).setHours(time.value.substring(0, 2), time.value.substring(3, 5)) +
       new Date().getTimezoneOffset() * 60 * 1000
@@ -77,24 +64,24 @@ function bookTime() {
   axios
     .post("/carwash/createOrder", {
       date: formedDate,
+      serviceId: serviceSelectedId.value,
     })
     .then(function (response) {
-      console.log(response);
+      isProcessing.value = false;
+      window.location.href = response.data;
     });
 }
-
-async function getServiceList() {
-  axios.get(`/carwash/getServiceInfo?id=${props.service.Id}`).then((response) => {
-    let servInfoResp = response.data
-    servInfoResp.forEach(i => {
-      this.serv.push({Name: i["Name"], Description: i["Description"], Price: i["Price"]})
-    });
-  })
-}
-await getServiceList()
 </script>
 
 <style scoped>
+.loading {
+  background-color: var(--accent);
+}
+
+.selected {
+  background-color: var(--secondary);
+  border: 2px solid var(--secondary-dark);
+}
 
 button {
   border: 1px solid #000;
@@ -113,7 +100,7 @@ button {
   overflow-y: auto;
   max-height: 50vh;
   margin: 1rem 0;
-  padding: .5em;
+  padding: 0.5em;
   padding-left: 0;
   border-block: 2px solid var(--primary);
 }
@@ -122,18 +109,19 @@ button {
   border: 2px solid var(--primary);
   text-align: start;
   border-radius: 1em;
-  padding: .5em;
-  margin-top: .5em;
+  padding: 0.5em;
+  margin-top: 0.5em;
   transition: 0.3s;
+  cursor: pointer;
 }
 
-.service-item:hover{
+.service-item:hover {
   background-color: var(--primary);
   border: 2px solid var(--secondary);
 }
 
-.service-item p:not(:nth-child(1)){
-  margin-top: .5em;
+.service-item p:not(:nth-child(1)) {
+  margin-top: 0.5em;
 }
 
 .price {
@@ -143,7 +131,7 @@ button {
   background-color: var(--primary);
   border: 1px solid #000;
   border-radius: 0.5em;
-  padding: .3em 1em;
+  padding: 0.3em 1em;
   align-self: center;
   transition: 0.3s;
 }

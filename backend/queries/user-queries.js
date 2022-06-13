@@ -24,7 +24,7 @@ function login(req, res, next) {
   db.one(`select * from "Users" where "Email" = '${req.body.email}'`)
     .then(async (data) => {
       if (await bcrypt.compare(req.body.password, data.PasswordHash))
-        res.send(generateToken(data.Email))
+        res.send(generateToken(data.Id, data.Email))
       else return next('Wrong password')
     })
     .catch(function (err) {

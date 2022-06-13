@@ -2,6 +2,7 @@ var db = require("./data-source");
 const wooppay = require("../services/payment-service");
 const genGuid = require("../helpers/helpers").generateGuid;
 const genTimeSlots = require("./time-intervals").getIntervals;
+const jwt = require("jsonwebtoken");
 
 function search(req, res, next) {
   db.any(
@@ -44,22 +45,41 @@ async function getTimeSlots(req, res, next) {
 
 async function createOrder(req, res, next) {
   let order = null;
-  let userPhone = "";
+  let userPhone,
+    facilId,
+    userId = "";
   let servicePrice = 0;
 
-  const tempDate = new Date(req.body.date);
-  const bookDate = new Date(tempDate - tempDate.getTimezoneOffset() * 60 * 1000)
-  console.log(bookDate.toLocaleString())
-  res.send("test")
- /*  await db
+  try {
+    const jwtDat = jwt.verify(req.headers.authorization, process.env.TOKEN_SECRET);
+    userId = jwtDat.id;
+
+    await db.one(`SELECT "Phone" FROM "Users" WHERE "Id" = '${userId}'`).then(async (data) => {
+      userPhone = data.Phone;
+
+      await db
+        .one(`SELECT "CarWashId", "Price" FROM "Services" WHERE "Id" = '${req.body.serviceId}'`)
+        .then((data) => {
+          servicePrice = data.Price;
+          facilId = data.CarWashId;
+        })
+        .catch(function (err) {
+          return next(err);
+        });
+    });
+  } catch {
+    return next(err);
+  }
+
+  await db
     .query(
       `INSERT INTO "Orders"
     ("Id", "UserId", "FacilityId", "BoxNumber", "CustomerName", 
       "CarPlate", "ServiceId", "BookedDate",
       "SubmissionDate", "IsPaid", "IsServiced")
-    VALUES ('${genGuid()}', '${req.body.userId}', '${req.body.facilId}', '${req.body.boxNumber}', 
-      '${req.body.customerName}', '${req.body.carPlate}', '${req.body.serviceId}', '${req.body.bookedDate}', 
-      '${new Date()}', '${false}', '${false}') RETURNING *`
+    VALUES ('${genGuid()}', '${userId}', '${facilId}', '1', 
+      'customerNameTest', 'carPlateTest', '${req.body.serviceId}', '${new Date(req.body.date).toISOString()}', 
+      '${new Date().toISOString()}', '${false}', '${false}') RETURNING *`
     )
     .then(function (data) {
       order = data;
@@ -68,24 +88,7 @@ async function createOrder(req, res, next) {
       return next(err);
     });
 
-  db.one(`SELECT "Phone" FROM "Users" WHERE "Id" = '${req.body.userId}'`)
-    .then((data) => {
-      userPhone = data.Phone;
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-
-  db.one(`SELECT "Price" FROM "Services" WHERE "Id" = '${req.body.serviceId}'`)
-    .then((data) => {
-      servicePrice = data.Price;
-    })
-    .catch(function (err) {
-      return next(err);
-    });
-
-  await wooppay.initSession();
-  res.send(await wooppay.createInvoice(userPhone, genGuid(), servicePrice)); */
+  res.send(await wooppay.createInvoice(userPhone, genGuid(), servicePrice));
 }
 
 async function verifyPayment(req, res, next) {
