@@ -4,7 +4,7 @@
       <div class="sidebar-top">
         <div class="searchbar">
           <input class="search-input" type="text" placeholder="Search" name="search" v-model="srchMod.search" />
-          <button type="submit" class="search-btn" @click="search()">
+          <button id="search-btn" type="submit" class="search-btn" @click="search()">
             <img src="/search-glass.png" class="glass-icon" />
           </button>
         </div>
@@ -54,6 +54,13 @@ const selectedService = ref(null);
 const srchMod = ref({ search: "" });
 let isAscending = true;
 
+document.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.key === "Enter") {
+        document.getElementById("search-btn").click();
+    }
+});
+
 function search(query = srchMod.value.search) {
   axios.get(`/carwash/search?q=${query}`).then((response) => {
     services.value = response.data.data;
@@ -63,9 +70,9 @@ function search(query = srchMod.value.search) {
 
 function getServices(facilType = 0) {
   axios.get(`/carwash/getCoords?type=${facilType}&asc=${isAscending}`).then((response) => {
-    services.value = response.data;
-    markers.value = response.data;
-  });
+      services.value = response.data;
+      markers.value = response.data;
+    });
 }
 getServices();
 
