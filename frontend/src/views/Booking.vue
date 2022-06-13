@@ -1,8 +1,58 @@
 <template>
   <div class="booking-container">
     <h1 class="title">{{ service.Name }}</h1>
-    <p class="rating">{{ service.Address }}</p>
-    <p class="adress">Rating: {{ service.Rating }}</p>
+<p class="adress">{{ service.Address }}</p>
+    <p class="rating_num">Rating: {{ service.Rating }}</p>
+    <div class="simple-rating">
+      <div class="simple-rating__items">
+        <input
+          id="simple-rating__5"
+          type="radio"
+          class="simple-rating__item"
+          name="simple-rating"
+          value="5"
+          @click = "rating(5)"
+        />
+        <label for="simple-rating__5" class="simple-rating__label"></label>
+        <input
+          id="simple-rating__4"
+          type="radio"
+          class="simple-rating__item"
+          checked
+          name="simple-rating"
+          value="4"
+          @click = "rating(4)"
+        />
+        <label for="simple-rating__4" class="simple-rating__label"></label>
+        <input
+          id="simple-rating__3"
+          type="radio"
+          class="simple-rating__item"
+          name="simple-rating"
+          value="3"
+          @click = "rating(3)"
+        />
+        <label for="simple-rating__3" class="simple-rating__label"></label>
+        <input
+          id="simple-rating__2"
+          type="radio"
+          class="simple-rating__item"
+          name="simple-rating"
+          value="2"
+          @click = "rating(2)"
+        />
+        <label for="simple-rating__2" class="simple-rating__label"></label>
+        <input
+          id="simple-rating__1"
+          type="radio"
+          class="simple-rating__item"
+          name="simple-rating"
+          value="1"
+          @click = "rating(1)"
+        />
+        <label for="simple-rating__1" class="simple-rating__label"></label>
+      </div>
+    </div>
     <h2>Choose an услугу:</h2>
     <div class="service-list">
       <div
@@ -71,9 +121,65 @@ function bookTime() {
       window.location.href = response.data;
     });
 }
+
+function rating(rating){
+  console.log(rating)
+  axios.post(`/carwash/setRating`, {rating: rating, serviceId: props.service.Id, })
+}
 </script>
 
 <style scoped>
+.simple-rating {
+  position: relative;
+  font-size: 40px;
+  display: inline-block;
+}
+.simple-rating::before {
+  content: "★★★★★";
+  display: block;
+  color: #000;
+}
+.simple-rating__items {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  overflow: hidden;
+}
+.simple-rating__item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0%;
+  height: 0%;
+  opacity: 0;
+  visibility: hidden;
+}
+.simple-rating__label {
+  font-size: 40px;
+  cursor: pointer;
+  height:min-content;
+  width:min-content;
+  color: #000;
+}
+.simple-rating__label::before {
+  content: "★";
+
+  transition: color 0.3s ease 0s;
+}
+.simple-rating__item:checked,
+.simple-rating__item:checked ~ .simple-rating__label {
+  color: #ffd300;
+}
+.simple-rating__label:hover,
+.simple-rating__label:hover ~ .simple-rating__label,
+.simple-rating__label:checked ~ .simple-rating__label:hover {
+  color: #ffd300;
+}
 .loading {
   background-color: var(--accent);
 }

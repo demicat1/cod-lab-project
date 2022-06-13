@@ -9,5 +9,6 @@ router.route('/getCoords').get(mapping.getCoords)
 router.route('/search').get(carwash.search)
 router.route('/getTimeSlots').get(carwash.getTimeSlots)
 router.route('/getServiceInfo').get(serviceInfo.getServiceInfo)
+router.route('/setRating').post(carwash.setRating)
 
 module.exports = router
