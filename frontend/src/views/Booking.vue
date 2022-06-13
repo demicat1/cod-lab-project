@@ -124,7 +124,9 @@ function bookTime() {
 
 function rating(rating){
   console.log(rating)
-  axios.post(`/carwash/setRating`, {rating: rating, serviceId: props.service.Id, })
+  axios.post(`/carwash/setRating`, {rating: rating, serviceId: props.service.Id, }).then((response)=>{
+    props.service.Rating = response.data
+  })
 }
 </script>
 

@@ -100,13 +100,12 @@ async function setRating(req, res, next){
     const jwtDat = jwt.verify(req.headers.authorization, process.env.TOKEN_SECRET);
     Id = jwtDat.id;
     await db.any(`SELECT COUNT("UserId") FROM "Ratings" WHERE "UserId" = '${Id}' AND "FacilityId" = '${req.body.serviceId}'`).then((data) => {
-      console.log(data[0].count);
       if(data[0].count == 0){
         db.none(`INSERT INTO "Ratings" ("Id", "UserId", "FacilityId", "Value" ) 
         VALUES( '${genGuid()}', '${Id}', '${req.body.serviceId}', '${req.body.rating}')`).then((data) =>{
           db.one(`SELECT AVG("Value") FROM "Ratings" WHERE "FacilityId" = '${req.body.serviceId}'`).then((data) => {
-            console.log(data)
             db.none(`UPDATE "Facilities" SET "Rating" = '${data.avg}' WHERE "Id" = '${req.body.serviceId}'`)
+            res.send(`${data.avg}`)
           })
         })
       }
@@ -114,13 +113,13 @@ async function setRating(req, res, next){
         db.none(`UPDATE "Ratings" SET "Value" = '${req.body.rating}' 
         WHERE "UserId" = '${Id}' AND "FacilityId" = '${req.body.serviceId}'`).then((data) =>{
           db.one(`SELECT AVG("Value") FROM "Ratings" WHERE "FacilityId" = '${req.body.serviceId}'`).then((data) => {
-            console.log(data)
             db.none(`UPDATE "Facilities" SET "Rating" = '${data.avg}' WHERE "Id" = '${req.body.serviceId}'`)
+            res.send(`${data.avg}`)
           })
         })
       }
       })
-      res.status(200)
+
   }
   catch(err){
     return next(err)
