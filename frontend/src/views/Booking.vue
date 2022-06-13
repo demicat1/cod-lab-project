@@ -12,6 +12,7 @@
           name="simple-rating"
           value="5"
           @click="rating(5)"
+
         />
         <label for="simple-rating__5" class="simple-rating__label"></label>
         <input
@@ -21,7 +22,7 @@
           checked
           name="simple-rating"
           value="4"
-          @click="rating(4)"
+          @click = "rating(4)"
         />
         <label for="simple-rating__4" class="simple-rating__label"></label>
         <input
@@ -30,7 +31,7 @@
           class="simple-rating__item"
           name="simple-rating"
           value="3"
-          @click="rating(3)"
+          @click = "rating(3)"
         />
         <label for="simple-rating__3" class="simple-rating__label"></label>
         <input
@@ -39,7 +40,7 @@
           class="simple-rating__item"
           name="simple-rating"
           value="2"
-          @click="rating(2)"
+          @click = "rating(2)"
         />
         <label for="simple-rating__2" class="simple-rating__label"></label>
         <input
@@ -48,7 +49,7 @@
           class="simple-rating__item"
           name="simple-rating"
           value="1"
-          @click="rating(1)"
+          @click = "rating(1)"
         />
         <label for="simple-rating__1" class="simple-rating__label"></label>
       </div>
@@ -143,13 +144,11 @@ function bookTime() {
     });
 }
 
-function rating(rating) {
-  console.log(rating);
-  axios
-    .post(`/carwash/setRating`, { rating: rating, serviceId: props.service.Id })
-    .then((response) => {
-      props.service.Rating = response.data;
-    });
+function rating(rating){
+  console.log(rating)
+  axios.post(`/carwash/setRating`, {rating: rating, serviceId: props.service.Id, }).then((response)=>{
+    props.service.Rating = response.data
+  })
 }
 </script>
 
