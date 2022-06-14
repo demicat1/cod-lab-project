@@ -67,11 +67,15 @@
           <b>{{ s.Name }}</b>
         </p>
         <p>{{ s.Description }}</p>
-        <p class="price">{{ s.Price }}</p>
+        <p class="price">{{ s.Price }} ₸</p>
       </div>
     </div>
-    <input type="date" id="date" class="date" v-model="date" />
-    <TimeDropdown :items="times" @selectTime="time = $event.value" />
+    <div class="inputs-container">
+      <input type="text" name="client-name" id="" placeholder="Your name">
+      <input type="text" name="car-plate" id="" placeholder="Car plate">
+      <input type="date" id="date" class="date" v-model="date" />
+      <TimeDropdown :items="times" @selectTime="time = $event.value" />
+    </div>
     <button
       class="book-btn"
       :class="{ loading: isProcessing }"
@@ -81,12 +85,12 @@
       Book
     </button>
     <button
-      class="book-btn accent"
+      class="close-btn"
       :class="{ loading: isProcessing }"
       :disabled="isProcessing"
       @click="$emit('return')"
     >
-      Return
+      ❌
     </button>
   </div>
 </template>
@@ -220,6 +224,7 @@ button {
 .booking-container {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .booking-container > * {
@@ -236,7 +241,8 @@ button {
 }
 
 .service-item {
-  border: 2px solid var(--primary);
+  background-color: var(--primary);
+  border: 2px solid var(--secondary);
   text-align: start;
   border-radius: 1em;
   padding: 0.5em;
@@ -246,8 +252,7 @@ button {
 }
 
 .service-item:hover {
-  background-color: var(--primary);
-  border: 2px solid var(--secondary);
+  background-color: var(--secondary);
 }
 
 .service-item p:not(:nth-child(1)) {
@@ -257,6 +262,23 @@ button {
 .price {
   text-align: right;
 }
+
+.inputs-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+
+.inputs-container input{
+  background-color: var(--primary);
+  outline: none;
+  border: 1px solid #000;
+  border-radius: 0.5em;
+  padding: 0.3em 0.5em;
+  margin: 0.3em;
+  max-width: 9em;
+}
+
 .date {
   background-color: var(--primary);
   border: 1px solid #000;
@@ -271,24 +293,30 @@ button {
 }
 
 .book-btn {
-  background-color: var(--secondary);
-  padding: 0.5rem;
-  padding-inline: 2rem;
+  background-color: var(--accent);
+  padding: 0.5em 2em;
   border-radius: 5rem;
   cursor: pointer;
   margin: 0.5rem;
   align-self: center;
 }
 .book-btn:hover {
-  background-color: var(--secondary-dark);
-}
-
-.accent {
-  background-color: var(--accent);
-}
-
-.accent:hover {
   background-color: var(--accent-dark);
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  border-radius: 0.5em;
+  padding: 0.3em;
+  margin: 0.1em;
+  background-color: var(--secondary);
+}
+
+.close-btn:hover {
+  background-color: var(--secondary-dark);
 }
 
 /* Track */
