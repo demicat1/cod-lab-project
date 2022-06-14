@@ -54,7 +54,7 @@
         <label for="simple-rating__1" class="simple-rating__label"></label>
       </div>
     </div>
-    <h2>Choose an услугу:</h2>
+    <h2>Choose service:</h2>
     <div class="service-list">
       <div
         class="service-item"
