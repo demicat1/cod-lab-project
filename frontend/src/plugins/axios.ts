@@ -33,5 +33,5 @@ axios.interceptors.response.use(
 ); */
 
 export function setAuthHeader(token: string) {
-    axios.defaults.headers.common['Authorization'] = "Bearer " + token;
+    axios.defaults.headers.common['Authorization'] = token;
 }

@@ -78,8 +78,8 @@ async function createOrder(req, res, next) {
       "CarPlate", "ServiceId", "BookedDate",
       "SubmissionDate", "IsPaid", "IsServiced")
     VALUES ('${genGuid()}', '${userId}', '${facilId}', '1', 
-      'customerNameTest', 'carPlateTest', '${req.body.serviceId}', '${new Date(req.body.date).toISOString()}', 
-      '${new Date().toISOString()}', '${false}', '${false}') RETURNING *`
+      '${req.body.customerName}', '${req.body.carPlate}', '${req.body.serviceId}', '${new Date(req.body.date).toISOString()}', 
+      '${new Date().toISOString()}', '${true}', '${false}') RETURNING *`
     )
     .then(function (data) {
       order = data;
@@ -95,36 +95,38 @@ async function verifyPayment(req, res, next) {
   // TODO   // , "OperationId"
 }
 
-async function setRating(req, res, next){
-  try{
+async function setRating(req, res, next) {
+  try {
     const jwtDat = jwt.verify(req.headers.authorization, process.env.TOKEN_SECRET);
     Id = jwtDat.id;
-    await db.any(`SELECT COUNT("UserId") FROM "Ratings" WHERE "UserId" = '${Id}' AND "FacilityId" = '${req.body.serviceId}'`).then((data) => {
-      if(data[0].count == 0){
-        db.none(`INSERT INTO "Ratings" ("Id", "UserId", "FacilityId", "Value" ) 
-        VALUES( '${genGuid()}', '${Id}', '${req.body.serviceId}', '${req.body.rating}')`).then((data) =>{
-          db.one(`SELECT AVG("Value") FROM "Ratings" WHERE "FacilityId" = '${req.body.serviceId}'`).then((data) => {
-            db.none(`UPDATE "Facilities" SET "Rating" = '${data.avg}' WHERE "Id" = '${req.body.serviceId}'`)
-            res.send(`${data.avg}`)
-          })
-        })
-      }
-      else{
-        db.none(`UPDATE "Ratings" SET "Value" = '${req.body.rating}' 
-        WHERE "UserId" = '${Id}' AND "FacilityId" = '${req.body.serviceId}'`).then((data) =>{
-          db.one(`SELECT AVG("Value") FROM "Ratings" WHERE "FacilityId" = '${req.body.serviceId}'`).then((data) => {
-            db.none(`UPDATE "Facilities" SET "Rating" = '${data.avg}' WHERE "Id" = '${req.body.serviceId}'`)
-            res.send(`${data.avg}`)
-          })
-        })
-      }
-      })
-
+    await db
+      .any(`SELECT COUNT("UserId") FROM "Ratings" WHERE "UserId" = '${Id}' AND "FacilityId" = '${req.body.serviceId}'`)
+      .then((data) => {
+        if (data[0].count == 0) {
+          db.none(
+            `INSERT INTO "Ratings" ("Id", "UserId", "FacilityId", "Value" ) 
+        VALUES( '${genGuid()}', '${Id}', '${req.body.serviceId}', '${req.body.rating}')`
+          ).then((data) => {
+            db.one(`SELECT AVG("Value") FROM "Ratings" WHERE "FacilityId" = '${req.body.serviceId}'`).then((data) => {
+              db.none(`UPDATE "Facilities" SET "Rating" = '${data.avg}' WHERE "Id" = '${req.body.serviceId}'`);
+              res.send(`${data.avg}`);
+            });
+          });
+        } else {
+          db.none(
+            `UPDATE "Ratings" SET "Value" = '${req.body.rating}' 
+        WHERE "UserId" = '${Id}' AND "FacilityId" = '${req.body.serviceId}'`
+          ).then((data) => {
+            db.one(`SELECT AVG("Value") FROM "Ratings" WHERE "FacilityId" = '${req.body.serviceId}'`).then((data) => {
+              db.none(`UPDATE "Facilities" SET "Rating" = '${data.avg}' WHERE "Id" = '${req.body.serviceId}'`);
+              res.send(`${data.avg}`);
+            });
+          });
+        }
+      });
+  } catch (err) {
+    return next(err);
   }
-  catch(err){
-    return next(err)
-  }
-  
 }
 
 module.exports = {

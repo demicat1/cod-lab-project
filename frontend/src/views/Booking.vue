@@ -5,15 +5,7 @@
     <p class="rating_num">Rating: {{ service.Rating }}</p>
     <div class="simple-rating">
       <div class="simple-rating__items">
-        <input
-          id="simple-rating__5"
-          type="radio"
-          class="simple-rating__item"
-          name="simple-rating"
-          value="5"
-          @click="rating(5)"
-
-        />
+        <input id="simple-rating__5" type="radio" class="simple-rating__item" name="simple-rating" value="5" @click="rating(5)" />
         <label for="simple-rating__5" class="simple-rating__label"></label>
         <input
           id="simple-rating__4"
@@ -22,35 +14,14 @@
           checked
           name="simple-rating"
           value="4"
-          @click = "rating(4)"
+          @click="rating(4)"
         />
         <label for="simple-rating__4" class="simple-rating__label"></label>
-        <input
-          id="simple-rating__3"
-          type="radio"
-          class="simple-rating__item"
-          name="simple-rating"
-          value="3"
-          @click = "rating(3)"
-        />
+        <input id="simple-rating__3" type="radio" class="simple-rating__item" name="simple-rating" value="3" @click="rating(3)" />
         <label for="simple-rating__3" class="simple-rating__label"></label>
-        <input
-          id="simple-rating__2"
-          type="radio"
-          class="simple-rating__item"
-          name="simple-rating"
-          value="2"
-          @click = "rating(2)"
-        />
+        <input id="simple-rating__2" type="radio" class="simple-rating__item" name="simple-rating" value="2" @click="rating(2)" />
         <label for="simple-rating__2" class="simple-rating__label"></label>
-        <input
-          id="simple-rating__1"
-          type="radio"
-          class="simple-rating__item"
-          name="simple-rating"
-          value="1"
-          @click = "rating(1)"
-        />
+        <input id="simple-rating__1" type="radio" class="simple-rating__item" name="simple-rating" value="1" @click="rating(1)" />
         <label for="simple-rating__1" class="simple-rating__label"></label>
       </div>
     </div>
@@ -71,27 +42,13 @@
       </div>
     </div>
     <div class="inputs-container">
-      <input type="text" name="client-name" id="" placeholder="Your name">
-      <input type="text" name="car-plate" id="" placeholder="Car plate">
+      <input type="text" name="client-name" id="" placeholder="Your name" v-model="customerName" />
+      <input type="text" name="car-plate" id="" placeholder="Car plate" v-model="carPlate" />
       <input type="date" id="date" class="date" v-model="date" />
       <TimeDropdown :items="times" @selectTime="time = $event.value" />
     </div>
-    <button
-      class="book-btn"
-      :class="{ loading: isProcessing }"
-      :disabled="isProcessing"
-      @click="bookTime()"
-    >
-      Book
-    </button>
-    <button
-      class="close-btn"
-      :class="{ loading: isProcessing }"
-      :disabled="isProcessing"
-      @click="$emit('return')"
-    >
-      ❌
-    </button>
+    <button class="book-btn" :class="{ loading: isProcessing }" :disabled="isProcessing" @click="bookTime()">Book</button>
+    <button class="close-btn" :class="{ loading: isProcessing }" :disabled="isProcessing" @click="$emit('return')">❌</button>
   </div>
 </template>
 
@@ -105,24 +62,20 @@ defineEmits(["return"]);
 
 const date = ref(new Date().toISOString().substring(0, 10));
 const times = await (
-  await axios.get(
-    `/carwash/getTimeSlots?id=${props.service.Id}&date=${new Date(
-      "2022-04-11"
-    ).toLocaleDateString()}`
-  )
+  await axios.get(`/carwash/getTimeSlots?id=${props.service.Id}&date=${new Date().toLocaleDateString()}`)
 ).data;
 const time = ref(times[0]);
 const services = ref([]);
 const serviceSelectedId = ref("");
+const customerName = ref("");
+const carPlate = ref("");
 const isProcessing = ref(false);
 
 async function getServiceList() {
-  axios
-    .get(`/carwash/getServiceInfo?id=${props.service.Id}`)
-    .then((response) => {
-      services.value = response.data;
-      serviceSelectedId.value = services.value[0].Id;
-    });
+  axios.get(`/carwash/getServiceInfo?id=${props.service.Id}`).then((response) => {
+    services.value = response.data;
+    serviceSelectedId.value = services.value[0].Id;
+  });
 }
 await getServiceList();
 
@@ -130,10 +83,7 @@ function bookTime() {
   isProcessing.value = true;
 
   const formedDate = new Date(
-    new Date(date.value).setHours(
-      time.value.substring(0, 2),
-      time.value.substring(3, 5)
-    ) +
+    new Date(date.value).setHours(time.value.substring(0, 2), time.value.substring(3, 5)) +
       new Date().getTimezoneOffset() * 60 * 1000
   );
 
@@ -141,6 +91,8 @@ function bookTime() {
     .post("/carwash/createOrder", {
       date: formedDate,
       serviceId: serviceSelectedId.value,
+      customerName: customerName.value,
+      carPlate: carPlate.value
     })
     .then(function (response) {
       isProcessing.value = false;
@@ -148,11 +100,10 @@ function bookTime() {
     });
 }
 
-function rating(rating){
-  console.log(rating)
-  axios.post(`/carwash/setRating`, {rating: rating, serviceId: props.service.Id, }).then((response)=>{
-    props.service.Rating = response.data
-  })
+function rating(rating) {
+  axios.post(`/carwash/setRating`, { rating: rating, serviceId: props.service.Id }).then((response) => {
+    props.service.Rating = response.data;
+  });
 }
 </script>
 
@@ -269,7 +220,7 @@ button {
   justify-items: center;
 }
 
-.inputs-container input{
+.inputs-container input {
   background-color: var(--primary);
   outline: none;
   border: 1px solid #000;
